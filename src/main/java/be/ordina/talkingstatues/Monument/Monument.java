@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Monument.Model;
+package be.ordina.talkingstatues.Monument;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,9 +18,6 @@ public class Monument {
     private Double latitude;
     @NotEmpty
     private String area;
-
-    public Monument() {
-    }
 
     public Monument(@NotEmpty List<Information> information, @NotEmpty Double longitude, @NotEmpty Double latitude,@NotEmpty String area) {
         this.information = information;

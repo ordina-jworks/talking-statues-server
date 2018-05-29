@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Monument.Model;
+package be.ordina.talkingstatues.Monument;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.List;

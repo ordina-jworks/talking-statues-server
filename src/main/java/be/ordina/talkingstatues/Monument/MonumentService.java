@@ -1,8 +1,5 @@
 package be.ordina.talkingstatues.Monument;
 
-import be.ordina.talkingstatues.Monument.Model.Information;
-import be.ordina.talkingstatues.Monument.Model.Language;
-import be.ordina.talkingstatues.Monument.Model.Monument;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -26,15 +23,20 @@ public class MonumentService {
     }
 
     Monument getStatueByIdAndLanguage(String id,String language){
-        Monument monument =monumentRepository.findById(id)
+        Monument monument = monumentRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Monument with id: "+id+" does not exist"));
         monument.setInformation(monument.getInformation().stream()
-                .filter(mon -> mon.getLanguage().toString().equals(language))
+                .filter(mon -> mon.getLanguage().toString().equalsIgnoreCase(language))
                 .collect(Collectors.toList()));
         return monument;
     }
 
-    List<Monument> findAll(){
-        return monumentRepository.findAll();
+    List<Monument> findAllForLanguage(String language){
+        return monumentRepository.findAll().stream()
+                .peek(monument -> monument.setInformation(
+                        monument.getInformation().stream()
+                        .filter(mon -> mon.getLanguage().toString().equalsIgnoreCase(language))
+                        .collect(Collectors.toList())))
+                .collect(Collectors.toList());
     }
 }

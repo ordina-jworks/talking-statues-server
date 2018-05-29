@@ -1,6 +1,5 @@
 package be.ordina.talkingstatues.Monument;
 
-import be.ordina.talkingstatues.Monument.Model.Monument;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +25,8 @@ public class MonumentController {
     Monument getStatue_v2(@PathVariable String language, @PathVariable String id){
         return monumentService.getStatueByIdAndLanguage(id,language);
     }
-    @GetMapping(value = "/{language}/monuments/", produces = {"application/vnd.ordina.v1.0+json"})
+    @GetMapping(value = "/{language}/monuments", produces = {"application/vnd.ordina.v1.0+json"})
     List<Monument> getStatues(@PathVariable String language){
-        return monumentService.findAll();
+        return monumentService.findAllForLanguage(language);
     }
 }
