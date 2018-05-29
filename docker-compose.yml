@@ -1,31 +1,26 @@
-version: "2.1"
+version: '3'
 services:
-  mongo:
+  database:
     image: mongo:3.2.4
+    container_name: "talking-statues-database"
+    environment:
+    - MONGO_DATA_DIR=/data/db
     ports:
     - 27017:27017
-    command: --smallfiles
-
-  mongo-init:
-    build: ./mongo-init
-    links:
-      - mongo
-
-  mongo-client:
-    image: mongoclient/mongoclient
+    volumes:
+    - db-data:/var/lib/mongo/data/db
+    networks:
+    - backend
+  backend:
+    build: .
+    container_name: "talking-statues-server"
     ports:
-    - 3030:3000
-    environment:
-      - MONGOCLIENT_DEFAULT_CONNECTION_URL=mongodb://mongo:27017
+    - 9000:8080
+    networks:
+    - backend
     links:
-      - mongo
-
-# APP  ***************************************************************************************
-  spring-boot-mongo-docker:
-    image: davromalc/spring-boot-mongo-docker
-    ports:
-    - 8080:8080
-    links:
-    - mongo
-    entrypoint: "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
-
+    - database
+volumes:
+  db-data:
+networks:
+  backend:

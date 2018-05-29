@@ -1,8 +1,11 @@
 package be.ordina.talkingstatues.Monument;
 
+import be.ordina.talkingstatues.Monument.Model.Information;
+import be.ordina.talkingstatues.Monument.Model.Language;
 import be.ordina.talkingstatues.Monument.Model.Monument;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +16,13 @@ public class MonumentService {
 
     public MonumentService(MonumentRepository statueRepository) {
         this.monumentRepository = statueRepository;
+
+        monumentRepository.deleteAll();
+        Monument monument1 = new Monument(Collections.singletonList(new Information(Language.NL, "Antoon van Dyck", "...", null)),1.1,1.2,"Meir-Leysstraat-Jezusstraat");
+        Monument monument2 = new Monument(Collections.singletonList(new Information(Language.NL,"Hendrik Conscience","...",null)),1.1,1.2,"Hendrik Conscienceplein");
+
+        monumentRepository.save(monument1);
+        monumentRepository.save(monument2);
     }
 
     Monument getStatueByIdAndLanguage(String id,String language){
