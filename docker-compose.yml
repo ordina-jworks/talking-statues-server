@@ -1,16 +1,21 @@
 version: '3'
 services:
   database:
-    image: mongo:3.2.4
+    image: mongo:3.4
     container_name: "talking-statues-database"
-    environment:
-    - MONGO_DATA_DIR=/data/db
     ports:
     - 27017:27017
     volumes:
-    - db-data:/var/lib/mongo/data/db
+    #- talking-statues-data:/data/db
+    - ./config/database/ssl:/etc/ssl
+    - ./config/database/script:/docker-entrypoint-initdb.d
     networks:
     - backend
+    environment:
+    - MONGO_INITDB_DATABASE=admin
+    - MONGO_INITDB_ROOT_USERNAME=admin
+    - MONGO_INITDB_ROOT_PASSWORD=admin
+
   backend:
     build: .
     container_name: "talking-statues-server"
@@ -21,6 +26,6 @@ services:
     links:
     - database
 volumes:
-  db-data:
+  talking-statues-data:
 networks:
   backend:
