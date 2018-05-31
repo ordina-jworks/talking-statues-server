@@ -8,5 +8,6 @@ public class TalkingStatuesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TalkingStatuesApplication.class, args);
 	}
+
 }
 
