@@ -1,42 +1,54 @@
 package be.ordina.talkingstatues.Monument;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.http.MediaType;
-
-
-import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/monuments")
 public class MonumentController {
 
     private final MonumentService monumentService;
+    private final Random random = new Random();
 
     public MonumentController(MonumentService monumentService) {
         this.monumentService = monumentService;
     }
-
-    @GetMapping(value = "/{language}/monuments/{id}", produces = {"application/vnd.ordina.v1.0+json"})
-    Monument getStatue_v1(@PathVariable String language, @PathVariable String id){
-        return monumentService.getStatueByIdAndLanguage(id,language);
+    @GetMapping(value = "/{language}/{id}", produces = {"application/vnd.ordina.v1.0+json"})
+    Monument getMonument(@PathVariable String id, @PathVariable String language){
+        return monumentService.getMonumentByIdAndLanguage(id,language);
     }
 
-    @GetMapping(value = "/{language}/monuments/{id}", produces = {"application/vnd.ordina.v2.0+json"})
-    Monument getStatue_v2(@PathVariable String language, @PathVariable String id){
-        return monumentService.getStatueByIdAndLanguage(id,language);
+    @GetMapping(value = "/{language}", produces = {"application/vnd.ordina.v1.0+json"})
+    List<Monument> getTinderOptions(@RequestParam String area, @PathVariable String language){
+        List<Monument> monuments = monumentService.getMonumentsByAreaAndLanguage(area,language);
+        Collections.shuffle(monuments);
+        if(monuments.size() >=10){
+            return IntStream.range(0,10)
+                    .mapToObj(monuments::get)
+                    .collect(Collectors.toList());
+        }else {
+            return monuments;
+        }
     }
 
-    @GetMapping(value = "/{language}/monuments", produces = {"application/vnd.ordina.v1.0+json"})
-    List<Monument> getStatues(@PathVariable String language){
-        return monumentService.findAllForLanguage(language);
+
+    //ADMIN
+
+    @GetMapping(value = "")
+    List<Monument> getMonuments(){
+        return monumentService.findAll();
+    }
+    @PostMapping(value = "")
+    Monument addMonuments(Monument monument){
+        return monumentService.addMonument(monument);
     }
 
     @GetMapping(value = "/{language}/monuments/{id}/image", produces = MediaType.IMAGE_JPEG_VALUE)
@@ -51,5 +63,14 @@ public class MonumentController {
         }
         baos.flush();
         return  baos.toByteArray();
+    }
+    @GetMapping(value = "/{id}")
+    Monument getMonument(@PathVariable String id){
+        return monumentService.getMonumentById(id);
+    }
+    @PutMapping(value = "/{id}")
+    void addMonuments(@PathVariable String id, @RequestBody Monument monument){
+        monument.setId(id);
+        monumentService.putMonument(id,monument);
     }
 }

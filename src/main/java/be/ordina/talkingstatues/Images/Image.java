@@ -1,9 +1,12 @@
 package be.ordina.talkingstatues.Images;
 
 import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.gridfs.GridFSInputFile;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.gridfs.GridFsResource;
 
 import javax.validation.constraints.NotEmpty;
 @Document(collection = "images")
@@ -14,9 +17,9 @@ public class Image {
     @Field("monument_id")
     private String monumentId;
     @NotEmpty
-    private GridFS image;
+    private GridFSInputFile image;
 
-    public Image(@NotEmpty String monumentId, @NotEmpty GridFS image) {
+    public Image(@NotEmpty String monumentId, GridFSInputFile image) {
         this.monumentId = monumentId;
         this.image = image;
     }
@@ -37,11 +40,11 @@ public class Image {
         this.monumentId = monumentId;
     }
 
-    public GridFS getImage() {
+    public GridFSInputFile getImage() {
         return image;
     }
 
-    public void setImage(GridFS image) {
+    public void setImage(GridFSInputFile image) {
         this.image = image;
     }
 }

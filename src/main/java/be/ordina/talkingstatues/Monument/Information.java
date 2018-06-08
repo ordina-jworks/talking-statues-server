@@ -12,6 +12,9 @@ public class Information {
     private String description;
     private List<Question> questions;
 
+    public Information() {
+    }
+
     public Information(@NotEmpty Language language, @NotEmpty String name, @NotEmpty String description, List<Question> questions) {
 
         this.language = language;

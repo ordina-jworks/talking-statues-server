@@ -1,32 +1,21 @@
 package be.ordina.talkingstatues.Monument;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "QUESTION")
+import javax.validation.constraints.NotEmpty;
+
 public class Question {
-    @Id
-    private String id;
+    @NotEmpty
     private String question;
+    @NotEmpty
     private String answer;
 
     public Question() {
     }
 
-    public Question(String id, String question, String answer) {
-        this.id = id;
+    public Question(@NotEmpty String question, @NotEmpty String answer) {
         this.question = question;
         this.answer = answer;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getQuestion() {
         return question;
     }

@@ -18,6 +18,7 @@ public class Monument {
     private Double latitude;
     @NotEmpty
     private String area;
+    private String imageRef;
 
     private String picture;
 
