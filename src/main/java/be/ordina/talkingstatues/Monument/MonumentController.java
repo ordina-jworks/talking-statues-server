@@ -41,8 +41,8 @@ public class MonumentController {
 
     @GetMapping(value = "/{language}/monuments/{id}/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getImage(@PathVariable String language, @PathVariable String id) throws IOException {
-
-        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("/images/statue1.jpg");
+        Monument m = monumentService.getStatueByIdAndLanguage(id,language);
+        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("/images/" + m.getPicture());
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
         int read;

@@ -15,11 +15,9 @@ public class MonumentService {
         this.monumentRepository = statueRepository;
 
         monumentRepository.deleteAll();
-        Monument monument1 = new Monument(Collections.singletonList(new Information(Language.NL, "Antoon van Dyck", "...", null)),1.1,1.2,"Meir-Leysstraat-Jezusstraat");
-        Monument monument2 = new Monument(Collections.singletonList(new Information(Language.NL,"Hendrik Conscience","...",null)),1.1,1.2,"Hendrik Conscienceplein");
-
-        monumentRepository.save(monument1);
-        monumentRepository.save(monument2);
+        for (Monument m : MonumentInitialData.DATA) {
+            monumentRepository.save(m);
+        }
     }
 
     Monument getStatueByIdAndLanguage(String id,String language){

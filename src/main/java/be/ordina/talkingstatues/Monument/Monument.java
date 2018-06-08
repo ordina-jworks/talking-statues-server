@@ -19,11 +19,14 @@ public class Monument {
     @NotEmpty
     private String area;
 
-    public Monument(@NotEmpty List<Information> information, @NotEmpty Double longitude, @NotEmpty Double latitude,@NotEmpty String area) {
+    private String picture;
+
+    public Monument(@NotEmpty List<Information> information, @NotEmpty Double longitude, @NotEmpty Double latitude,@NotEmpty String area, String picture) {
         this.information = information;
         this.longitude = longitude;
         this.latitude = latitude;
         this.area = area;
+        this.picture = picture;
     }
 
     public String getId() {
@@ -64,5 +67,13 @@ public class Monument {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }
