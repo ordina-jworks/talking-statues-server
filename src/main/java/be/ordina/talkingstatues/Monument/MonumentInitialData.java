@@ -37,12 +37,29 @@ public class MonumentInitialData {
             "Toch was den Door ook een grote fratsenmaker, die een goede pot gerstenat niet uit de weg ging en wiens luchthartigheid niet te temperen viel door armoede of tegenslag.\n" +
             "In 1847 was het plots gedaan met dichten. Drinken deed hij echter des te meer. In november 1848 belandde hij in het gesticht aan de Rochusstraat te Antwerpen, waar hij 2 maand later volslagen krankzinnig overleed.";
 
+    private static final String aardeDescription = "Vier identieke beelden zijn voor het 75-jarig bestaan van de maatschappij voor sociale woningbouw 'S.M. Huisvesting' ontworpen en geplaatst in de wijken waar de maatschappij woningcomplexen liet optrekken. De inhuldiging vond plaats op 8 novemner 1996. Enkel het beeld op de Hendriklei kreeg een plechtige inhuldiging. \n" +
+            "De beelden stellen een rechtopstaande bejaarde Indiaan voor met ontbloot bovenlichaam. In de rechterarm een waaier van arendveren, met afhangende veren op de rug en het onderlichaam bedekt met een dierenhuid.\n" +
+            "De beelden zijn gelegen aan de Hendriklei (grens Kiel- district Hoboken), op Linkeroever (E.Verhaerenlaan, hoek Gloriantlaan), op Luchtbal (parkje tussen Canada- en Noorderlaan) en tussen de huizenblokken vooraan in de Prekerstraat (St.-Andrieskwartier, nabij Kloosterstraat).";
+
+    private static final String vrouwfigDescription = "Abstracte beelden die verscheidene vrouwenfiguren tonen.";
+
+    private static final String mmDescription = "Centraal in het hartje van de Antwerpse modebuurt ligt het ModeMuseum Provincie Antwerpen, kortweg MoMu. Het museum beheert achter de schermen een collectie van ruim 25.000 objecten (kleding, schoenen, accessoires...) die echter niet voor het publiek toegankelijk zijn. Wel toont het MoMu wisselende thematentoonstellingen over een ontwerper of modehuis, of over een ander mode-gerelateerd thema.";
+
+    private static final String sakDescription = "De Sint-Andrieskerk is de parochiekerk van de Sint-Andriesparochie in de stad Antwerpen. Deze parochie valt ongeveer samen met de vierde wijk of het Sint-Andrieskwartier en was destijds bekend als de parochie van miserie. De bouw van de kerk werd begonnen door de paters Augustijnen in het begin van de 16e eeuw. Hendrik Conscience was een van de borelingen die in deze kerk werden gedoopt. Sinds 25 november 2007 werd een deel van de kerk ingericht en opengesteld als kerkmuseum.";
+
+    private static final String costaDescription = "Het cultureel ontmoetingscentrum Sint-Andries (coStA) biedt een gevarieerd cultureel programma in de Antwerpse binnenstad. CoStA ondersteunt en versterkt het buurt- en verenigingsleven. Jong en oud vinden hier theater, muziek, dans, cursussen en workshops.";
+
     public static final Monument[] DATA = new Monument[]{
             new Monument(Collections.singletonList(new Information(Language.NL, "de NEUS", neusDescription, null)),51.2149218763, 4.3983936310,"Sint-Andries", "statue1.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL,"Peter De Grote", pdgDescription,null)),51.2141422857,4.3938016891,"Sint-Andries", "statue2.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "Willem Elsschot (zuil)", wezDescirption, null)),51.2149581960, 4.3967404660,"Sint-Andries", "statue3.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "Netje", netjeDescription, null)),51.2162995688, 4.3976318836,"Sint-Andries", "statue4.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Theodoor Van Rijswijck", tvrDescription, null)),51.2167498301, 4.3997669220,"Sint-Andries", "statue5.jpg")
+            new Monument(Collections.singletonList(new Information(Language.NL, "Theodoor Van Rijswijck", tvrDescription, null)),51.2167498301, 4.3997669220,"Sint-Andries", "statue5.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Vrouwenfiguren", vrouwfigDescription, null)),51.2171887212, 4.3987561460,"Sint-Andries", "statue6.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Mode Museum", mmDescription, null)),51.217575, 4.399560,"Sint-Andries", "statue7.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Andrieskerk", sakDescription, null)),51.216519, 4.398070,"Sint-Andries", "statue8.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "coStA", costaDescription, null)),51.214930, 4.395855,"Sint-Andries", "statue9.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Aarde", aardeDescription, null)),51.1886235713, 4.3723547459,"Sint-Andries", "statue10.jpg")
     };
 
 }
