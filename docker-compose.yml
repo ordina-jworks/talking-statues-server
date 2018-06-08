@@ -21,6 +21,7 @@ services:
     container_name: "talking-statues-server"
     ports:
     - 9000:8080
+    - 8000:8000
     networks:
     - backend
     links:
