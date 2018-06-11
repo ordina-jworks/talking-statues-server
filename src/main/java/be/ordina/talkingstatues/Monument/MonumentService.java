@@ -1,20 +1,25 @@
 package be.ordina.talkingstatues.Monument;
 
+import org.springframework.data.mongodb.gridfs.GridFsResource;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class MonumentService {
 
     private final MonumentRepository monumentRepository;
+    private final GridFsTemplate gridFsTemplate;
 
-    public MonumentService(MonumentRepository statueRepository) {
+    public MonumentService(MonumentRepository statueRepository, GridFsTemplate gridFsTemplate) {
         this.monumentRepository = statueRepository;
+        this.gridFsTemplate = gridFsTemplate;
 
         monumentRepository.deleteAll();
         for (Monument m : MonumentInitialData.DATA) {
@@ -40,6 +45,18 @@ public class MonumentService {
                 .filter(mon -> mon.getLanguage().toString().equalsIgnoreCase(language))
                 .collect(Collectors.toList()));
         return monument;
+    }
+
+    List<Monument> getTinderSelection(String area,String language){
+        List<Monument> monuments = getMonumentsByAreaAndLanguage(area,language);
+        Collections.shuffle(monuments);
+        if(monuments.size() >=10){
+            return IntStream.range(0,10)
+                    .mapToObj(monuments::get)
+                    .collect(Collectors.toList());
+        }else {
+            return monuments;
+        }
     }
 
     List<Monument> findAllForLanguage(String language){
@@ -68,5 +85,15 @@ public class MonumentService {
             monument.setId(id);
             monumentRepository.save(monument);
         });
+    }
+    void saveImage(MultipartFile file, String id){
+        try {
+            gridFsTemplate.store(file.getInputStream(),id,file.getContentType());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    GridFsResource getImageForMonumentId(String id){
+        return gridFsTemplate.getResource(id);
     }
 }

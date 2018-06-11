@@ -1,5 +1,6 @@
 package be.ordina.talkingstatues.Monument;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class MonumentInitialData {
@@ -50,16 +51,16 @@ public class MonumentInitialData {
     private static final String costaDescription = "Het cultureel ontmoetingscentrum Sint-Andries (coStA) biedt een gevarieerd cultureel programma in de Antwerpse binnenstad. CoStA ondersteunt en versterkt het buurt- en verenigingsleven. Jong en oud vinden hier theater, muziek, dans, cursussen en workshops.";
 
     public static final Monument[] DATA = new Monument[]{
-            new Monument(Collections.singletonList(new Information(Language.NL, "de NEUS", neusDescription, null)),51.2149218763, 4.3983936310,"Sint-Andries", "statue1.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL,"Peter De Grote", pdgDescription,null)),51.2141422857,4.3938016891,"Sint-Andries", "statue2.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Willem Elsschot (zuil)", wezDescirption, null)),51.2149581960, 4.3967404660,"Sint-Andries", "statue3.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Netje", netjeDescription, null)),51.2162995688, 4.3976318836,"Sint-Andries", "statue4.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Theodoor Van Rijswijck", tvrDescription, null)),51.2167498301, 4.3997669220,"Sint-Andries", "statue5.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Vrouwenfiguren", vrouwfigDescription, null)),51.2171887212, 4.3987561460,"Sint-Andries", "statue6.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Mode Museum", mmDescription, null)),51.217575, 4.399560,"Sint-Andries", "statue7.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Andrieskerk", sakDescription, null)),51.216519, 4.398070,"Sint-Andries", "statue8.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "coStA", costaDescription, null)),51.214930, 4.395855,"Sint-Andries", "statue9.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Aarde", aardeDescription, null)),51.1886235713, 4.3723547459,"Sint-Andries", "statue10.jpg")
+            new Monument(Collections.singletonList(new Information(Language.NL, "de NEUS", neusDescription, new ArrayList<>())),51.2149218763, 4.3983936310,"Sint-Andries", "statue1.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL,"Peter De Grote", pdgDescription,new ArrayList<>())),51.2141422857,4.3938016891,"Sint-Andries", "statue2.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Willem Elsschot (zuil)", wezDescirption,new ArrayList<>())),51.2149581960, 4.3967404660,"Sint-Andries", "statue3.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Netje", netjeDescription, new ArrayList<>())),51.2162995688, 4.3976318836,"Sint-Andries", "statue4.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Theodoor Van Rijswijck", tvrDescription, new ArrayList<>())),51.2167498301, 4.3997669220,"Sint-Andries", "statue5.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Vrouwenfiguren", vrouwfigDescription, new ArrayList<>())),51.2171887212, 4.3987561460,"Sint-Andries", "statue6.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Mode Museum", mmDescription, new ArrayList<>())),51.217575, 4.399560,"Sint-Andries", "statue7.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Andrieskerk", sakDescription, new ArrayList<>())),51.216519, 4.398070,"Sint-Andries", "statue8.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "coStA", costaDescription, new ArrayList<>())),51.214930, 4.395855,"Sint-Andries", "statue9.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Aarde", aardeDescription, new ArrayList<>())),51.1886235713, 4.3723547459,"Sint-Andries", "statue10.jpg")
     };
 
 }
