@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/config")
 public class ConfigurationController {
 
+    private final ConfigurationService configService;
+
+    public ConfigurationController(ConfigurationService configService) {
+        this.configService = configService;
+    }
+
     @GetMapping(value = "/google", produces = {"application/vnd.ordina.v1.0+json"})
-    public String getGoogleApiKey(){
-        return "AIzaSyB8XRZJKwlGjlWu15KRI7j-6VFT_LL9TDE";
+    public Configuration getGoogleApiKey(){
+        return configService.getConfigurationById(Configuration.GOOGLE_API_KEY);
     }
 
 }
