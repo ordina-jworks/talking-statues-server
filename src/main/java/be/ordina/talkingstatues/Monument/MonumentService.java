@@ -49,19 +49,20 @@ public class MonumentService {
         return Collections.max(questionMap.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
     }
 
-    List<Information> getTinderSelection(String area, String language){
-        List<Information> informationList = monumentRepository.findAllByArea(area).stream()
-                .map(Monument::getInformation)
-                .flatMap(Collection::stream)
-                .filter(monument -> monument.getLanguage().toString().equalsIgnoreCase(language))
+    List<SwipeMonument> getTinderSelection(String area, String language){
+        List<SwipeMonument> monuments = monumentRepository.findAllByArea(area).stream()
+                .peek(monument -> monument.setInformation(monument.getInformation().stream()
+                        .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))
+                        .collect(Collectors.toList())))
+                .map(i-> new SwipeMonument(i.getId(),i.getInformation().get(0).getName()))
                 .collect(Collectors.toList());
-        Collections.shuffle(informationList);
-        if(informationList.size() >=10){
+        Collections.shuffle(monuments);
+        if(monuments.size() >=10){
             return IntStream.range(0,10)
-                    .mapToObj(informationList::get)
+                    .mapToObj(monuments::get)
                     .collect(Collectors.toList());
         }else {
-            return informationList;
+            return monuments;
         }
     }
 
@@ -90,7 +91,7 @@ public class MonumentService {
             e.printStackTrace();
         }
     }
-    
+
     GridFsResource getImageForMonumentId(String id){
         return gridFsTemplate.getResource(id);
     }
