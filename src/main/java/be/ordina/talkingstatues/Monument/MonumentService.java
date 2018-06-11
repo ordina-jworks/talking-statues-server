@@ -27,7 +27,7 @@ public class MonumentService {
         monumentRepository.deleteAll();
         for (Monument m : MonumentInitialData.DATA) {
             monumentRepository.save(m);
-            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("/images/" + m.getPicture());
+            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("images/" + m.getPicture());
             saveImage(inputStream, m.getId());
         }
     }
@@ -89,13 +89,6 @@ public class MonumentService {
             monument.setId(id);
             monumentRepository.save(monument);
         });
-    }
-    void saveImage(MultipartFile file, String id){
-        try {
-            gridFsTemplate.store(file.getInputStream(),id,file.getContentType());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     void saveImage(InputStream stream, String id){

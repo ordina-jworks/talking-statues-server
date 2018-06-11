@@ -1,11 +1,13 @@
 package be.ordina.talkingstatues.Monument;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -70,8 +72,13 @@ public class MonumentController {
 
     @PostMapping("/{id}/image")
     public ResponseEntity uploadProfilePic(@RequestParam("file") MultipartFile file, @PathVariable String id){
-        monumentService.saveImage(file,id);
-        return ResponseEntity.ok().build();
+        try {
+            monumentService.saveImage(file.getInputStream(),id);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
 
