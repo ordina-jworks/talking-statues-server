@@ -40,12 +40,12 @@ public class MonumentController {
     @GetMapping(value = "/{id}/questions", produces = {"application/vnd.ordina.v1.0+json"})
     Question getMonumentQuestions(@PathVariable String id,
                                      @RequestParam("lang") String language,
-                                     @RequestParam("question") String[] question){
+                                     @RequestParam("question") String question){
         return monumentService.getMonumentQuestionByIdAndLanguageAndQuestion(id,language,question);
     }
 
     @GetMapping(value = "/selection", produces = {"application/vnd.ordina.v1.0+json"})
-    List<Monument> getTinderSelection(@RequestParam String area, @RequestParam("lang") String language){
+    List<SwipeMonument> getTinderSelection(@RequestParam String area, @RequestParam("lang") String language){
         return monumentService.getTinderSelection(area,language);
     }
 
