@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,45 +26,43 @@ public class MonumentService {
         }
     }
 
-    Monument getMonumentByIdAndLanguage(String id, String language){
-        Monument monument = monumentRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Monument with id: "+id+" does not exist"));
-        return filterOnLanguage(monument,language);
-    }
     Monument getMonumentById(String id){
         return monumentRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Monument with id: "+id+" does not exist"));
     }
-    List<Monument> getMonumentsByAreaAndLanguage(String area, String language){
-        return monumentRepository.findAllByArea(area).stream()
-        .peek(monument -> filterOnLanguage(monument,language)).collect(Collectors.toList());
-    }
-    Monument filterOnLanguage(Monument monument, String language){
-        monument.setInformation(monument.getInformation().stream()
-                .filter(mon -> mon.getLanguage().toString().equalsIgnoreCase(language))
-                .collect(Collectors.toList()));
-        return monument;
+
+    Information getMonumentInformationByIdAndLanguage(String id, String language){
+        Monument monument = monumentRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Monument with id: "+id+" does not exist"));
+        return monument.getInformation().stream()
+                .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))
+                .findFirst().orElseThrow(()-> new RuntimeException("Requested language is not supported"));
     }
 
-    List<Monument> getTinderSelection(String area,String language){
-        List<Monument> monuments = getMonumentsByAreaAndLanguage(area,language);
-        Collections.shuffle(monuments);
-        if(monuments.size() >=10){
+    Question getMonumentQuestionByIdAndLanguageAndQuestion(String id, String language,String question) {
+        List<Question> questions = getMonumentInformationByIdAndLanguage(id,language).getQuestion();
+        Map<Question,Long> questionMap = new HashMap<>();
+        questions.forEach(question1 -> questionMap.put(question1,
+                Arrays.stream(question.split(" "))
+                .filter(keyword -> question1.getQuestion().matches("(?i:.*"+keyword+".*)"))
+                .count()));
+        return Collections.max(questionMap.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
+    }
+
+    List<Information> getTinderSelection(String area, String language){
+        List<Information> informationList = monumentRepository.findAllByArea(area).stream()
+                .map(Monument::getInformation)
+                .flatMap(Collection::stream)
+                .filter(monument -> monument.getLanguage().toString().equalsIgnoreCase(language))
+                .collect(Collectors.toList());
+        Collections.shuffle(informationList);
+        if(informationList.size() >=10){
             return IntStream.range(0,10)
-                    .mapToObj(monuments::get)
+                    .mapToObj(informationList::get)
                     .collect(Collectors.toList());
         }else {
-            return monuments;
+            return informationList;
         }
-    }
-
-    List<Monument> findAllForLanguage(String language){
-        return monumentRepository.findAll().stream()
-                .peek(monument -> monument.setInformation(
-                        monument.getInformation().stream()
-                        .filter(mon -> mon.getLanguage().toString().equalsIgnoreCase(language))
-                        .collect(Collectors.toList())))
-                .collect(Collectors.toList());
     }
 
     List<Monument> findAll(){
@@ -93,6 +90,7 @@ public class MonumentService {
             e.printStackTrace();
         }
     }
+    
     GridFsResource getImageForMonumentId(String id){
         return gridFsTemplate.getResource(id);
     }

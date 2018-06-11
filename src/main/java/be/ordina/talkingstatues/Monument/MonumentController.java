@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 
 
 @RestController
@@ -17,18 +14,38 @@ import java.util.stream.IntStream;
 public class MonumentController {
 
     private final MonumentService monumentService;
-    private final Random random = new Random();
 
     public MonumentController(MonumentService monumentService) {
         this.monumentService = monumentService;
     }
-    @GetMapping(value = "/{language}/{id}", produces = {"application/vnd.ordina.v1.0+json"})
-    Monument getMonument(@PathVariable String id, @PathVariable String language){
-        return monumentService.getMonumentByIdAndLanguage(id,language);
+
+    @GetMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})
+    Monument getMonument(@PathVariable String id){
+        return monumentService.getMonumentById(id);
     }
 
-    @GetMapping(value = "/{language}", produces = {"application/vnd.ordina.v1.0+json"})
-    List<Monument> getTinderOptions(@RequestParam String area, @PathVariable String language){
+    @GetMapping(value = "/{id}/image", produces = MediaType.IMAGE_JPEG_VALUE)
+    ResponseEntity getImage(@PathVariable String id){
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION)
+                .body(monumentService.getImageForMonumentId(id));
+    }
+
+    @GetMapping(value = "/{id}/information", produces = {"application/vnd.ordina.v1.0+json"})
+    Information getMonumentInformation(@PathVariable String id, @RequestParam("lang") String language){
+        Information information = monumentService.getMonumentInformationByIdAndLanguage(id,language);
+        information.setQuestion(null);
+        return information;
+    }
+    @GetMapping(value = "/{id}/questions", produces = {"application/vnd.ordina.v1.0+json"})
+    Question getMonumentQuestions(@PathVariable String id,
+                                     @RequestParam("lang") String language,
+                                     @RequestParam("question") String[] question){
+        return monumentService.getMonumentQuestionByIdAndLanguageAndQuestion(id,language,question);
+    }
+
+    @GetMapping(value = "/selection", produces = {"application/vnd.ordina.v1.0+json"})
+    List<Monument> getTinderSelection(@RequestParam String area, @RequestParam("lang") String language){
         return monumentService.getTinderSelection(area,language);
     }
 
@@ -45,11 +62,6 @@ public class MonumentController {
         return monumentService.addMonument(monument);
     }
 
-    @GetMapping(value = "/{id}")
-    Monument getMonument(@PathVariable String id){
-        return monumentService.getMonumentById(id);
-    }
-
     @PutMapping(value = "/{id}")
     void addMonuments(@PathVariable String id, @RequestBody Monument monument){
         monument.setId(id);
@@ -62,10 +74,5 @@ public class MonumentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "/{id}/image", produces = MediaType.IMAGE_JPEG_VALUE)
-    ResponseEntity getImage(@PathVariable String id){
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION)
-                .body(monumentService.getImageForMonumentId(id));
-    }
+
 }

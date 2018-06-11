@@ -1,8 +1,10 @@
 package be.ordina.talkingstatues.Monument;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Information {
     @NotEmpty
     private Language language;
