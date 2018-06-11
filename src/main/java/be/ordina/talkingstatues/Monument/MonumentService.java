@@ -2,10 +2,11 @@ package be.ordina.talkingstatues.Monument;
 
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -19,10 +20,15 @@ public class MonumentService {
     public MonumentService(MonumentRepository statueRepository, GridFsTemplate gridFsTemplate) {
         this.monumentRepository = statueRepository;
         this.gridFsTemplate = gridFsTemplate;
+        this.initializeData();
+    }
 
+    public void initializeData() {
         monumentRepository.deleteAll();
         for (Monument m : MonumentInitialData.DATA) {
             monumentRepository.save(m);
+            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("/images/" + m.getPicture());
+            saveImage(inputStream, m.getId());
         }
     }
 
@@ -90,6 +96,10 @@ public class MonumentService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    void saveImage(InputStream stream, String id){
+        gridFsTemplate.store(stream, id, MediaType.IMAGE_JPEG_VALUE);
     }
 
     GridFsResource getImageForMonumentId(String id){
