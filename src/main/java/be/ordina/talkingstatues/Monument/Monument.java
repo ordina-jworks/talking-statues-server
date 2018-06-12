@@ -22,10 +22,13 @@ public class Monument {
 
     private String picture;
 
-    public Monument(@NotEmpty List<Information> information, @NotEmpty Double longitude, @NotEmpty Double latitude,@NotEmpty String area, String picture) {
+    public Monument() {
+    }
+
+    public Monument(@NotEmpty List<Information> information,@NotEmpty Double latitude,@NotEmpty Double longitude, @NotEmpty String area, String picture) {
         this.information = information;
-        this.longitude = longitude;
         this.latitude = latitude;
+        this.longitude = longitude;
         this.area = area;
         this.picture = picture;
     }
