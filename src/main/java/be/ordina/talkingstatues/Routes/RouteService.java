@@ -1,6 +1,5 @@
 package be.ordina.talkingstatues.Routes;
 
-import be.ordina.talkingstatues.Monument.Monument;
 import be.ordina.talkingstatues.Monument.MonumentRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,16 +24,17 @@ public class RouteService {
         return routeRepository.findAll();
     }
 
-    List<Monument> save(Route route) {
-        Route savedRoute = routeRepository.save(route);
-        if(savedRoute.getLocations()==null){
-            return new ArrayList<>();
-        }
-        return savedRoute.getLocations().stream()
-                .map(monumentRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
+    Route create(RouteRequest routeRequest) {
+       if(routeRequest.getLocations()==null){
+            routeRequest.setLocations(new ArrayList<>());
+       }
+       return routeRepository.save(new Route(routeRequest.getName(),
+               routeRequest.getLocations().stream()
+                       .map(monumentRepository::findById)
+                       .filter(Optional::isPresent)
+                       .map(Optional::get)
+                       .collect(Collectors.toList())
+       ));
     }
 
     void deleteRoute(String id){

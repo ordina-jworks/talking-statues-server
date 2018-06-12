@@ -1,7 +1,11 @@
 package be.ordina.talkingstatues.Routes;
 
+import be.ordina.talkingstatues.Monument.Monument;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -12,14 +16,15 @@ public class Route {
     private String id;
     @NotEmpty
     private String name;
-    private List<String> locations;
+    @DBRef
+    private List<Monument> monuments;
 
     public Route() {
     }
 
-    public Route(@NotEmpty String name, List<String> locations) {
+    public Route(@NotEmpty String name, List<Monument> monuments) {
         this.name = name;
-        this.locations = locations;
+        this.monuments=monuments;
     }
 
     public String getId() {
@@ -38,11 +43,11 @@ public class Route {
         this.name = name;
     }
 
-    public List<String> getLocations() {
-        return locations;
+    public List<Monument> getMonuments() {
+        return monuments;
     }
 
-    public void setLocations(List<String> locations) {
-        this.locations = locations;
+    public void setMonuments(List<Monument> monuments) {
+        this.monuments = monuments;
     }
 }

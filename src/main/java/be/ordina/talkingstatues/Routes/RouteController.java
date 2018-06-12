@@ -22,9 +22,8 @@ public class RouteController {
     }
 
     @PostMapping(value = "", produces = {"application/vnd.ordina.v1.0+json"})
-    ResponseEntity<List<Monument>> createRoute(@RequestBody Route route){
-        List<Monument> savedRoute = routeService.save(route);
-
+    ResponseEntity<Route> createRoute(@RequestBody RouteRequest routeRequest){
+        Route savedRoute = routeService.create(routeRequest);
         return new ResponseEntity<>(savedRoute,HttpStatus.CREATED);
     }
     @DeleteMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})
