@@ -20,6 +20,7 @@ public class RouteController {
     List<Route> getAllRoutes(){
         return routeService.getRoutes();
     }
+
     @GetMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})
     Route getRoute(@PathVariable String id){
         return routeService.getRouteById(id);

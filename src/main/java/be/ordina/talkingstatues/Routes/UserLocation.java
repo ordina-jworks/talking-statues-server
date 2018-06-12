@@ -1,10 +1,10 @@
 package be.ordina.talkingstatues.Routes;
 
 public class UserLocation {
-    String longitude;
-    String latitude;
+    Double longitude;
+    Double latitude;
 
-    public UserLocation(String longitude, String latitude) {
+    public UserLocation(Double longitude, Double latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }
