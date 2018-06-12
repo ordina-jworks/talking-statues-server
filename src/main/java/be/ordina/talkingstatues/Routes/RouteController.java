@@ -17,8 +17,12 @@ public class RouteController {
     }
 
     @GetMapping(value = "", produces = {"application/vnd.ordina.v1.0+json"})
-    List<Route> getRoutes(){
+    List<Route> getAllRoutes(){
         return routeService.getRoutes();
+    }
+    @GetMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})
+    Route getRoute(@PathVariable String id){
+        return routeService.getRouteById(id);
     }
 
     @PostMapping(value = "", produces = {"application/vnd.ordina.v1.0+json"})

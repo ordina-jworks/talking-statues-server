@@ -23,6 +23,10 @@ public class RouteService {
     List<Route> getRoutes(){
         return routeRepository.findAll();
     }
+    Route getRouteById(String id){
+        return routeRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Route met id "+id+" bestaat niet"));
+    }
 
     Route create(RouteRequest routeRequest) {
        if(routeRequest.getLocations()==null){
