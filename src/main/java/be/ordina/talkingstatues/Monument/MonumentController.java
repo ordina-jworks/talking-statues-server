@@ -71,7 +71,7 @@ public class MonumentController {
     }
 
     @PostMapping("/{id}/image")
-    public ResponseEntity uploadProfilePic(@RequestParam("file") MultipartFile file, @PathVariable String id){
+    public ResponseEntity uploadImage(@RequestParam("file") MultipartFile file, @PathVariable String id){
         try {
             monumentService.saveImage(file.getInputStream(),id);
             return ResponseEntity.ok().build();
