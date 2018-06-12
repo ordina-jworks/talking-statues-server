@@ -1,4 +1,5 @@
 package be.ordina.talkingstatues.Routes;
+import be.ordina.talkingstatues.Monument.Monument;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,9 @@ public class RouteController {
     }
 
     @PostMapping(value = "", produces = {"application/vnd.ordina.v1.0+json"})
-    ResponseEntity<Route> saveRoute(@RequestBody Route route){
-        Route savedRoute = routeService.save(route);
+    ResponseEntity<List<Monument>> createRoute(@RequestBody Route route){
+        List<Monument> savedRoute = routeService.save(route);
+
         return new ResponseEntity<>(savedRoute,HttpStatus.CREATED);
     }
     @DeleteMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})
