@@ -4,7 +4,6 @@ import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.*;
@@ -55,7 +54,7 @@ public class MonumentService {
         return Collections.max(questionMap.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
     }
 
-    List<SwipeMonument> getTinderSelection(String area, String language){
+    List<SwipeMonument> getRandomSelection(String area, String language){
         List<SwipeMonument> monuments = monumentRepository.findAllByArea(area).stream()
                 .peek(monument -> monument.setInformation(monument.getInformation().stream()
                         .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))

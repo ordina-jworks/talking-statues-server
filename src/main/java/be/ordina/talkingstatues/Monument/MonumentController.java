@@ -47,8 +47,8 @@ public class MonumentController {
     }
 
     @GetMapping(value = "/selection", produces = {"application/vnd.ordina.v1.0+json"})
-    List<SwipeMonument> getTinderSelection(@RequestParam String area, @RequestParam("lang") String language){
-        return monumentService.getTinderSelection(area,language);
+    List<SwipeMonument> getRandomSelection(@RequestParam String area, @RequestParam("lang") String language){
+        return monumentService.getRandomSelection(area,language);
     }
 
 
