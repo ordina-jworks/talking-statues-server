@@ -18,9 +18,7 @@ public class RouteService {
         this.routeRepository = routeRepository;
         this.monumentRepository = monumentRepository;
 
-        UserLocation start = new UserLocation(4.454304,51.051742);
-
-        List<Monument> monuments = Dijkstra(monumentRepository.findAll(), start);
+        List<Monument> monuments = Dijkstra(monumentRepository.findAll(), new UserLocation(4.454304,51.051742));
         System.out.println(monuments);
     }
 
@@ -47,13 +45,19 @@ public class RouteService {
        return routeRepository.save(new Route(routeRequest.getName(),sortedMonuments));
     }
 
-    List<Monument> Dijkstra(List<Monument> monuments, UserLocation userLocation){
+    private List<Monument> Dijkstra(List<Monument> monuments, UserLocation userLocation){
         Node start = new Node("start",userLocation.longitude,userLocation.latitude);
         Set<Node> nodes = monuments.stream()
-                .map(monument -> new Node(monument.getId(),monument.getLongitude(),monument.getLatitude())).collect(Collectors.toSet());
-        nodes.add(start);
-        nodes.forEach(nodeA -> nodes.stream().filter(nodeB-> nodeB!=nodeA)
-                .forEach(nodeB -> nodeB.addDestination(nodeA,calculateDistance(nodeA.getLongitude(),nodeB.getLongitude(),nodeA.getLatitude(),nodeB.getLatitude()))));
+                .map(monument -> new Node(monument.getId(),monument.getLongitude(),monument.getLatitude()))
+                .collect(Collectors.toSet());
+        nodes.forEach(nodeA -> {
+            nodes.stream()
+                    .filter(nodeB-> nodeB!=nodeA)
+                    .forEach(nodeB -> nodeB.addDestination(nodeA,
+                            calculateDistance(nodeA.getLongitude(),nodeB.getLongitude(),nodeA.getLatitude(),nodeB.getLatitude())));
+            start.addDestination(nodeA,calculateDistance(nodeA.getLongitude(),start.getLongitude(),nodeA.getLatitude(),start.getLatitude()));
+
+        });
 
         Set<Node> sorted = calculateShortestPathFromSource(nodes, start);
         return sorted.stream()
@@ -63,7 +67,7 @@ public class RouteService {
                 .collect(Collectors.toList());
     }
 
-    Double calculateDistance(Double long1,Double long2, Double lat1, Double lat2){
+    private Double calculateDistance(Double long1, Double long2, Double lat1, Double lat2){
         final int R = 6371; // Radius of the earth
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(long2 - long1);
