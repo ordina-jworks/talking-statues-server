@@ -1,6 +1,7 @@
 package be.ordina.talkingstatues.routes;
 
-import be.ordina.talkingstatues.Monument.Monument;
+
+import be.ordina.talkingstatues.monument.Monument;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;

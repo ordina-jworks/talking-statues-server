@@ -1,6 +1,6 @@
 package be.ordina.talkingstatues.config;
 
-import be.ordina.talkingstatues.Monument.Information;
+import be.ordina.talkingstatues.monument.Information;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

@@ -1,6 +1,5 @@
 package be.ordina.talkingstatues.config;
 
-import be.ordina.talkingstatues.Monument.Monument;
 import org.springframework.stereotype.Service;
 
 @Service

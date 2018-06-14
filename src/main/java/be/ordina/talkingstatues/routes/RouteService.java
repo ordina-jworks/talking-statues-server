@@ -1,7 +1,7 @@
 package be.ordina.talkingstatues.routes;
 
-import be.ordina.talkingstatues.Monument.Monument;
-import be.ordina.talkingstatues.Monument.MonumentRepository;
+import be.ordina.talkingstatues.monument.Monument;
+import be.ordina.talkingstatues.monument.MonumentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
