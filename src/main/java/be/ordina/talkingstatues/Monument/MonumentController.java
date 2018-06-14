@@ -60,7 +60,7 @@ public class MonumentController {
     }
 
     @PostMapping(value = "")
-    Monument addMonuments(Monument monument){
+    Monument addMonuments(@RequestBody Monument monument){
         return monumentService.addMonument(monument);
     }
 
@@ -79,6 +79,13 @@ public class MonumentController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity delete(@PathVariable String id){
+        monumentService.deleteMonument(id);
+        return ResponseEntity.ok().build();
     }
 
 

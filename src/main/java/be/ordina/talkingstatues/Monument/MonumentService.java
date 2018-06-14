@@ -90,6 +90,10 @@ public class MonumentService {
         });
     }
 
+    void deleteMonument(String id){
+        monumentRepository.deleteById(id);
+    }
+
     void saveImage(InputStream stream, String id){
         gridFsTemplate.store(stream, id, MediaType.IMAGE_JPEG_VALUE);
     }
