@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Monument;
+package be.ordina.talkingstatues.monument;
 
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;

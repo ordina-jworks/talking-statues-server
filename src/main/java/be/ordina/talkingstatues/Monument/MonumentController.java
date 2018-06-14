@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Monument;
+package be.ordina.talkingstatues.monument;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.HttpHeaders;

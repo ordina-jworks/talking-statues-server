@@ -1,10 +1,10 @@
-package be.ordina.talkingstatues.Monument;
+package be.ordina.talkingstatues.monument;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
-
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Information {
     @NotEmpty

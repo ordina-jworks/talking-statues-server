@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Monument;
+package be.ordina.talkingstatues.monument;
 
 import java.util.ArrayList;
 import java.util.Collections;
