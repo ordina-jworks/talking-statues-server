@@ -60,7 +60,7 @@ public class MonumentController {
         return monumentService.findAll();
     }
 
-    @GetMapping(value = "/short") @JsonView(Aspect.ReducedMonumentView.class)
+    @GetMapping(value = "/short") @JsonView(Aspect.MinimalMonumentAspect.class)
     List<Monument> getMonumentsShort(){
         return monumentService.findAll();
     }
