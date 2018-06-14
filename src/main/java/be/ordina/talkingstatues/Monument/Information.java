@@ -1,6 +1,7 @@
 package be.ordina.talkingstatues.Monument;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public class Information {
     @NotEmpty
     private Language language;
-    @NotEmpty
+    @NotEmpty @JsonView(Aspect.ReducedMonumentView.class)
     private String name;
     @NotEmpty
     private String description;

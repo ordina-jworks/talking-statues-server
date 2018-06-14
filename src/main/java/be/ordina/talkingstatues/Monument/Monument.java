@@ -1,5 +1,6 @@
 package be.ordina.talkingstatues.Monument;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,9 +9,9 @@ import java.util.List;
 
 @Document(collection = "monuments")
 public class Monument {
-    @Id
+    @Id @JsonView(Aspect.ReducedMonumentView.class)
     private String id;
-    @NotEmpty
+    @NotEmpty @JsonView(Aspect.ReducedMonumentView.class)
     private List<Information> information;
     @NotEmpty
     private Double longitude;

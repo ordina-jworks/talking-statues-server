@@ -1,5 +1,6 @@
 package be.ordina.talkingstatues.Monument;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -56,6 +57,11 @@ public class MonumentController {
 
     @GetMapping(value = "")
     List<Monument> getMonuments(){
+        return monumentService.findAll();
+    }
+
+    @GetMapping(value = "/short") @JsonView(Aspect.ReducedMonumentView.class)
+    List<Monument> getMonumentsShort(){
         return monumentService.findAll();
     }
 
