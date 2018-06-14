@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Routes;
+package be.ordina.talkingstatues.routes;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

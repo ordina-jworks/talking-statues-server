@@ -1,11 +1,9 @@
-package be.ordina.talkingstatues.Routes;
+package be.ordina.talkingstatues.routes;
 
 import be.ordina.talkingstatues.Monument.Monument;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.List;

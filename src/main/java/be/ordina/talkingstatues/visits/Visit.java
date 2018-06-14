@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Visits;
+package be.ordina.talkingstatues.visits;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Routes;
+package be.ordina.talkingstatues.routes;
 
 import be.ordina.talkingstatues.Monument.Monument;
 import be.ordina.talkingstatues.Monument.MonumentRepository;

@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Monument;
+package be.ordina.talkingstatues.monument;
 
 public class Aspect {
 

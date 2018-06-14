@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Security;
+package be.ordina.talkingstatues.security;
 
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;

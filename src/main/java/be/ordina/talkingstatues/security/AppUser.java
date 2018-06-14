@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Security;
+package be.ordina.talkingstatues.security;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

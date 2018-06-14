@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.Routes;
+package be.ordina.talkingstatues.routes;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
