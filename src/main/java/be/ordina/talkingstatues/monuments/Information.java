@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.monument;
+package be.ordina.talkingstatues.monuments;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;

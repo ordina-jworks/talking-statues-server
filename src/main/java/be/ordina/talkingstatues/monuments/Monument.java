@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.monument;
+package be.ordina.talkingstatues.monuments;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

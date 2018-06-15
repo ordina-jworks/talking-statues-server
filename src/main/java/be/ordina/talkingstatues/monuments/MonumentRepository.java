@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.monument;
+package be.ordina.talkingstatues.monuments;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

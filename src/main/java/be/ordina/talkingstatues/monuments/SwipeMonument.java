@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.monument;
+package be.ordina.talkingstatues.monuments;
 
 public class SwipeMonument {
     String id;
