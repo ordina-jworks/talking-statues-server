@@ -8,9 +8,9 @@ import java.util.List;
 
 @Document(collection = "monuments")
 public class Monument {
-    @Id @JsonView(Aspect.MinimalMonumentAspect.class)
+    @Id @JsonView(Aspects.MinimalMonumentAspect.class)
     private String id;
-    @NotEmpty @JsonView(Aspect.MinimalMonumentAspect.class)
+    @NotEmpty @JsonView(Aspects.MinimalMonumentAspect.class)
     private List<Information> information;
     @NotEmpty
     private Double longitude;

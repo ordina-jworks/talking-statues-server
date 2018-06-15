@@ -1,6 +1,6 @@
 package be.ordina.talkingstatues.monuments;
 
-public class Aspect {
+public class Aspects {
 
     public interface MinimalMonumentAspect {}
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class Information {
     @NotEmpty
     private Language language;
-    @NotEmpty @JsonView(Aspect.MinimalMonumentAspect.class)
+    @NotEmpty @JsonView(Aspects.MinimalMonumentAspect.class)
     private String name;
     @NotEmpty
     private String description;
