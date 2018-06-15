@@ -50,7 +50,34 @@ public class MonumentInitialData {
 
     private static final String costaDescription = "Het cultureel ontmoetingscentrum Sint-Andries (coStA) biedt een gevarieerd cultureel programma in de Antwerpse binnenstad. CoStA ondersteunt en versterkt het buurt- en verenigingsleven. Jong en oud vinden hier theater, muziek, dans, cursussen en workshops.";
 
+    private static final String scheepvaartDescription = "In 1661 werd de Suikerrui overwelfd. De Schelde werd in 1882-83 rechtgetrokken aan de Van Dijckkaai. In 1903 werd dan door de Duitse koopman-bankier Malinckodt het Hansa-huis gebouwd. De bouwaanvraag was door architect J. Hertogs in 1901 ingediend. Het Hansa-huis werd opgetrokken in neobarokstijl. Geflankeerd door hoektorens, bestaat de gevelordonnatie uit kolossale driekwartzuilen met Fonische inslag. Het middenrisaliet is opgebouwd uit zuilen en afgewerkt met een gebroken gebogen fronton. Bovenaan zijn de \"Rijn & Schelde\" symbolisch afgebeeld in de vorm van baardige oude heren. Twee vrouwenfiguren stellen \"Elbe & Wezer\" voor. De bronzen beelden zijn allen van de hand van Jef Lambeaux die, naar men zegt zijn boezemvriendinnen als model koos. Aan de kant van de Kaasstraat wenkt een beeld dat de \"scheepvaart\" voorstelt. Hiervoor poseerde Lambeaux' favoriete model. Langs de kant van de Ernest Van Dijckkaai is er nog een beeld dat de handel voorstelt.";
+
+    private static final String appelmansDescription = "Rechts van de Onze-Lieve-Vrouwekathedraal waar tegen de onafgewerkte toren een bouwloge wordt voorgesteld: bouwmeester Appelmans, met het plan van de toren op de knie, geeft onderrichtingen aan de steenkappers. Appelmans was echter niet de enige bouwmeester van de kerk: onder de vele anderen vinden we bekende namen als Domien en Herman de Waghemakere (Vleeshuis) en Keldermans.";
+
+    private static final String braboDescription = "Brabofontein(1887). De bronzen fontein van de Antwerpse beeldhouwer Jef Lambeaux beeldt de legende uit van Brabo welke de reus Antigoon versloeg en diens hand in de Schelde wierp. Al is het verhaal verzonnen, toch houden de sinjoren hun legendarische bevrijder nog steeds in ere.";
+
+    private static final String buildragerDescription = "De buildrager is ingehuldigd op 4 september 1950. Het betreft een geïdealiseerd arbeidersfiguur met een gespierd lichaam, gekleed in een op het lichaam gemouleerd havenarbeidersplunje met de specifieke hoofdbedekking voor het dragen van zakken (builen). Zelfbewust en bijna uitdagend werpt hij zijn blik op de Schelde. Oorspronkelijk is de havenarbeider van Meunier een individualitisch voorgesleteld menselijk figuur, die geldt als symbool voor de bewustwording van de arbeidersklasse. Na WO 2 wordt hij, als aandenken aan de havenarbeiders die onder de Vliegende-bommenterreur bleven voortwerken, tevens symbool voor de herwonnen Vrijheid.";
+
+    private static final String putkevieDescription = "Oorspronkelijk op de bornput voor het stadhuis, ca. 1550 overgebracht naar de Handschoenmarkt. IJzersmeedwerk van dooreengestrengelde ranken, bekroond door Brabo gekleed als Romeins krijger. Op het cilindervormig arduinen voetstuk (ca. 1940) volgend opschrift: Oorspronkelijk op de bornput voor het stadhuis, ca. 1550 overgebracht naar de Handschoenmarkt. IJzersmeedwerk van dooreengestrengelde ranken, bekroond door Brabo gekleed als Romeins krijger. Op het cilindervormig arduinen voetstuk (ca. 1940) volgend opschrift: Dese putkevie werd gesmeed door Quinten Matsijs / De liefde maeckte van den smidt eenen schilder..";
+
+    private static final String pprDescription = "Peter Paul Rubens (Siegen, 28 juni 1577 – Antwerpen, 30 mei 1640) was een kunstschilder, tekenaar en diplomaat, werkzaam in Antwerpen, en is ongetwijfeld de populairste meester uit de Barok-periode. Hij wordt ook wel Pieter Paul, Pieter Pauwel of Petrus Paulus genoemd.\n" +
+            "Op de Groenplaats in Antwerpen staat een standbeeld van Rubens, hij was daarmee de eerste Vlaming die een standbeeld kreeg. In 1843 werd uiteindelijk het standbeeld van Rubens opgericht. De beeldhouwer was Willem Geefs.";
+
+    private static final String eierboerDescription = "n 1667 hing het beeldje dichter bij de Malkmarkt bij een waterpomp, in de buurt van het verdwenen Hespenstraatje. Teun was de stem van het volk. Hier hingen de mensen pamfletten met commentaar op wat er gebeurde in de stad, meestal kritisch, soms ook lovend.\n" +
+            "Het originele beeldje van Teun de Eierboer komt straks in het MAS. Aan de gevel op de Eiermarkt hangt een replica.";
+
+    private static final String conscienceDescription = "Henri (Hendrik) Conscience (Antwerpen, 3 december 1812 – Elsene, 10 september 1883) was een Vlaams schrijver. Hij had zich door talent en ijver opgewerkt tot een Vlaams volksschrijver.\n" +
+            "Door middel van zijn 'schilderende' teksten probeerde hij het volk op te voeden en te onderwijzen. In tegenstelling van wat Vlaamse bewegingen over hem beweren, was Conscience een overtuigd belgicist. Zijn populairste werk is De Leeuw van Vlaanderen en werd ook verfilmd. Een bekende uitspraak over hem is \"Hij leerde zijn volk lezen\".\n" +
+            "Naast schrijver was hij ook bestuurder, griffier, redacteur, arrondissementscommissaris en bewaarder van musea geweest. Hendrik Conscience overleed in Brussel in 1883 en werd begraven op het Antwerpse Schoonselhof.";
+
+    private static final String olvDescription = "De Onze-Lieve-Vrouwekathedraal van Antwerpen verzoent 'zijn' met 'worden'. Terwijl haar noordertoren al vijf eeuwen onveranderlijk het silhouet van de stad domineert, veranderde de kathedraal in diezelfde periode herhaaldelijk van uitzicht en interieur. Zo weerspiegelen zowel haar interieur als haar uiterlijke verschijning een heel aantal verschillende stijlen: gotiek, barok, rococo, renaissance, enz.";
+
+    private static final String boromDescription = "De kerk werd ontworpen door leden van de jezuïetenorde, zoals François d'Aguilon en Pieter Huyssens. De kerk werd tussen 1615 en 1621 gebouwd boven op de toenmalige Ankerrui (niet te verwarren met de huidige) voor die aansloot met de Minderbroedersrui.\n" +
+            "Oorspronkelijk was de kerk gewijd aan Ignatius van Loyola, stichter van de jezuïetenorde. Na het opheffen van de orde in 1773 werd de kerk opnieuw gewijd, ditmaal aan Carolus Borromeus. Na enige tijd gebruikt te zijn voor godsdienstonderwijs is het gebouw sinds 1803 in gebruik als parochiekerk.\n" +
+            "De kerk is een typisch product van de contrareformatie, waarin de katholieke Kerk probeerde met pracht en praal het volk weer aan zich te binden en waarin de jezuïeten een leidende rol speelden. De voorgevel is geïnspireerd op onder andere die van de Gesù-kerk in Rome, de moederkerk van de jezuïeten, en is acht meter hoger dan de kerk zelf. De kerk heeft een driebeukige, basilicale opzet. Boven de zijbeuken zijn galerijen aangebracht. Het koor wordt gemarkeerd door een toren.";
+
     public static final Monument[] DATA = new Monument[]{
+            /* Sint-Andries */
             new Monument(Collections.singletonList(new Information(Language.NL, "de NEUS", neusDescription, new ArrayList<>())), 4.3983936310,51.2149218763,"Sint-Andries", "statue1.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL,"Peter De Grote", pdgDescription,new ArrayList<>())),4.3938016891,51.2141422857,"Sint-Andries", "statue2.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "Willem Elsschot (zuil)", wezDescirption,new ArrayList<>())),4.3967404660,51.2149581960,"Sint-Andries", "statue3.jpg"),
@@ -60,7 +87,19 @@ public class MonumentInitialData {
             new Monument(Collections.singletonList(new Information(Language.NL, "Mode Museum", mmDescription, new ArrayList<>())),4.399560,51.217575, "Sint-Andries", "statue7.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Andrieskerk", sakDescription, new ArrayList<>())), 4.398070,51.216519,"Sint-Andries", "statue8.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "coStA", costaDescription, new ArrayList<>())),4.395855,51.214930, "Sint-Andries", "statue9.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Aarde", aardeDescription, new ArrayList<>())), 4.3723547459,51.1886235713,"Sint-Andries", "statue10.jpg")
+            new Monument(Collections.singletonList(new Information(Language.NL, "Aarde", aardeDescription, new ArrayList<>())), 4.3723547459,51.1886235713,"Sint-Andries", "statue10.jpg"),
+            /* Historisch Centrum */
+            new Monument(Collections.singletonList(new Information(Language.NL, "Pieter Appelmans", appelmansDescription, new ArrayList<>())), 4.4005018473,51.2201132099,"HistorischCentrum", "statue-c01.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Brabofontein", braboDescription, new ArrayList<>())), 4.3997347355,51.2211648456,"HistorischCentrum", "statue-c02.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Buildrager / Arbeid Vrijheid", buildragerDescription, new ArrayList<>())), 4.3989086151,51.2208994190,"HistorischCentrum", "statue-c03.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Putkevie", putkevieDescription, new ArrayList<>())), 4.4002443552,51.2205533543,"HistorischCentrum", "statue-c04.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Peter Paul Rubens", pprDescription, new ArrayList<>())), 4.4016015530,51.2192413083,"HistorischCentrum", "statue-c05.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Teun de Eierboer", eierboerDescription, new ArrayList<>())), 4.4041442871,51.2200829708,"HistorischCentrum", "statue-c06.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Hendrik Conscience", conscienceDescription, new ArrayList<>())), 4.4041872025,51.2208607809,"HistorischCentrum", "statue-c07.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Onze-Lieve-Vrouwekathedraal", olvDescription, new ArrayList<>())), 4.401559,51.220717,"HistorischCentrum", "statue-c08.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Carolus Borromeuskerk", boromDescription, new ArrayList<>())), 4.404649,51.221416,"HistorischCentrum", "statue-c09.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "De Scheepvaart", scheepvaartDescription, new ArrayList<>())), 4.3975665863,51.2212282367,"HistorischCentrum", "statue-c10.jpg")
+
     };
 
 }

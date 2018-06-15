@@ -11,10 +11,10 @@ services:
     - ./config/database/script:/docker-entrypoint-initdb.d
     networks:
     - backend
-    environment:
-    - MONGO_INITDB_DATABASE=admin
-    - MONGO_INITDB_ROOT_USERNAME=admin
-    - MONGO_INITDB_ROOT_PASSWORD=admin
+#    environment:
+#    - MONGO_INITDB_DATABASE=admin
+#    - MONGO_INITDB_ROOT_USERNAME=admin
+#    - MONGO_INITDB_ROOT_PASSWORD=admin
 
   backend:
     build: .
