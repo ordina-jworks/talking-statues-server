@@ -6,7 +6,6 @@ node('maven') {
     }
     stage('Build Image') {
         unstash name: "artifact"
-        sh "cp ./Dockerfile ./Dockerfile"
         sh "oc start-build talking-statues-backend-build --from-dir=target"
     }
 }
