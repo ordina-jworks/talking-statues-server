@@ -19,6 +19,7 @@ public class Route {
     private List<Monument> monuments;
 
     public Route() {
+
     }
 
     public Route(@NotEmpty String name, List<Monument> monuments) {
