@@ -67,14 +67,18 @@ public class UserDbSeeder {
 
     public void addVisitsToUsers() {
         List<AppUser> foundUsers = appUserRepository.findAll();
-
+        int count = 0;
         for (AppUser usr : foundUsers) {
-            Visit newVisit = new Visit(usr.getId(), monuments.get(1).getId());
+            if(count == 9){
+                count = 0;
+            }
+            Visit newVisit = new Visit(usr.getId(), monuments.get(count).getId());
             newVisit = this.visitRepository.save(newVisit);
 
             usr.addVisit(newVisit);
 
             appUserRepository.save(usr);
+            count++;
         }
     }
 }

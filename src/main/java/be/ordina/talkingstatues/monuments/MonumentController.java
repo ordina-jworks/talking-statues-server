@@ -110,5 +110,4 @@ public class MonumentController {
 
         foundUser.addVisit(newVisit);
     }
-
 }
