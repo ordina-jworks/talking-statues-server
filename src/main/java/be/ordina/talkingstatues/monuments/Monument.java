@@ -23,6 +23,7 @@ public class Monument {
     private String picture;
 
     public Monument() {
+
     }
 
     public Monument(@NotEmpty List<Information> information, @NotEmpty Double longitude, @NotEmpty Double latitude, @NotEmpty String area, String picture) {
