@@ -17,7 +17,7 @@ services:
     - MONGO_INITDB_ROOT_PASSWORD=admin
 
   backend:
-    build: ./target
+    build: .
     container_name: "talking-statues-server"
     ports:
     - 9000:8080
