@@ -1,0 +1,16 @@
+package be.ordina.talkingstatues.security;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+//import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class ViewConfigurations implements WebMvcConfigurer {
+
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/oauth").setViewName("oauth");
+    }
+
+
+}

@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.appusers;
+package be.ordina.talkingstatues.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,11 +21,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/oauth").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .oauth2Login().loginPage("/oauth").permitAll();
+                .oauth2Login()
+                .loginPage("/oauth")
+        ;
         //.defaultSuccessUrl("http://localhost:8100");
     }
+
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
@@ -43,4 +47,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 }
