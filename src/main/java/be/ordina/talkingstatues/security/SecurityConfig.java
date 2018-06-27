@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.authorizeRequests()
                 //.anyRequest().authenticated()
                 //.and()
-                .oauth2Login().defaultSuccessUrl("http://localhost:4200/dashboard");
+                .oauth2Login().defaultSuccessUrl("http://localhost:8100");
     }
 
     @Bean
@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 HttpMethod.PUT.toString(),
                 HttpMethod.GET.toString(),
                 HttpMethod.POST.toString()));
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        configuration.setAllowedOrigins(Collections.singletonList("*"));
         configuration.setAllowCredentials(true);
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

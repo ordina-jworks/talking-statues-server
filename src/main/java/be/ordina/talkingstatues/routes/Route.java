@@ -15,6 +15,7 @@ public class Route {
     private String id;
     @NotEmpty
     private String name;
+
     @DBRef
     private List<Monument> monuments;
 
