@@ -18,6 +18,8 @@ public class SecurityController {
 
     @GetMapping("user-info")
     String getUserInfo(OAuth2AuthenticationToken authentication){
+
+        // Handle
         if(authentication!=null){
             return authentication.getName();
         }

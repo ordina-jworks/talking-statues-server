@@ -30,6 +30,7 @@ public class UserDbSeeder {
     AppUser newUser8 = new AppUser("newUser8", "Anton", "cdpoziepd");
     AppUser newUser9 = new AppUser("newUser9", "Adriaan", "lzqdjlijqd");
     AppUser newUser10 = new AppUser("newUser10", "Joachim", "poekfpejoiehd");
+    AppUser newUser11 = new AppUser("newUser11", "Jef", "Willems");
 
     public UserDbSeeder(AppUserRepository appUserRepository, MonumentRepository monumentRepository, VisitRepository visitRepository) {
         this.appUserRepository = appUserRepository;
@@ -49,8 +50,9 @@ public class UserDbSeeder {
         seedUserToDb(newUser8);
         seedUserToDb(newUser9);
         seedUserToDb(newUser10);
+        seedUserToDb(newUser11);
 
-        /*addVisitsToUsers();*/
+        addVisitsToUsers();
 
     }
 
