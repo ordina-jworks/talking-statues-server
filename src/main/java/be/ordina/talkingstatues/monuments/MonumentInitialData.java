@@ -99,7 +99,7 @@ public class MonumentInitialData {
             new Monument(Collections.singletonList(new Information(Language.NL, "Onze-Lieve-Vrouwekathedraal", olvDescription, new ArrayList<>())), 4.401559,51.220717,"HistorischCentrum", "statue-c08.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Carolus Borromeuskerk", boromDescription, new ArrayList<>())), 4.404649,51.221416,"HistorischCentrum", "statue-c09.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "De Scheepvaart", scheepvaartDescription, new ArrayList<>())), 4.3975665863,51.2212282367,"HistorischCentrum", "statue-c10.jpg")
-
+            /* Area 3 ? */
     };
 
 }
