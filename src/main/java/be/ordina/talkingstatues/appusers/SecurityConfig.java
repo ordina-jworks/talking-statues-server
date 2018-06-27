@@ -20,10 +20,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors().and()
                 .csrf().disable()
-                //.authorizeRequests()
-                //.anyRequest().authenticated()
-                //.and()
-                .oauth2Login().defaultSuccessUrl("http://localhost:8100");
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .oauth2Login().loginPage("/oauth").permitAll();
+        //.defaultSuccessUrl("http://localhost:8100");
     }
 
     @Bean
