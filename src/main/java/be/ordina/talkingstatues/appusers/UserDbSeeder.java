@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.security;
+package be.ordina.talkingstatues.appusers;
 
 import be.ordina.talkingstatues.monuments.Monument;
 import be.ordina.talkingstatues.monuments.MonumentRepository;
