@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.security;
+package be.ordina.talkingstatues.appusers;
 
 import be.ordina.talkingstatues.routes.Route;
 import be.ordina.talkingstatues.visits.Visit;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
-@Document(collection = "users")
+@Document(collection = "appusers")
 public class AppUser {
 
     @Id

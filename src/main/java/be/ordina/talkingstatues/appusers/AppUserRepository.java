@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.security;
+package be.ordina.talkingstatues.appusers;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;

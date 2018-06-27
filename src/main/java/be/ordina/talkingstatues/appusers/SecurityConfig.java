@@ -1,4 +1,4 @@
-package be.ordina.talkingstatues.security;
+package be.ordina.talkingstatues.appusers;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

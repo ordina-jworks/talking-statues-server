@@ -1,7 +1,7 @@
 package be.ordina.talkingstatues.monuments;
 
-import be.ordina.talkingstatues.security.AppUser;
-import be.ordina.talkingstatues.security.AppUserRepository;
+import be.ordina.talkingstatues.appusers.AppUser;
+import be.ordina.talkingstatues.appusers.AppUserRepository;
 import be.ordina.talkingstatues.visits.Visit;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 
 @RestController
