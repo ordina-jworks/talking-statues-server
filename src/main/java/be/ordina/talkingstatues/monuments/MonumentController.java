@@ -1,6 +1,10 @@
 package be.ordina.talkingstatues.monuments;
 
+import be.ordina.talkingstatues.security.AppUser;
+import be.ordina.talkingstatues.security.AppUserRepository;
+import be.ordina.talkingstatues.visits.Visit;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 
 @RestController
@@ -17,9 +22,11 @@ import java.util.*;
 public class MonumentController {
 
     private final MonumentService monumentService;
+    private final AppUserRepository appUserRepository;
 
-    public MonumentController(MonumentService monumentService) {
+    public MonumentController(MonumentService monumentService, AppUserRepository appUserRepository) {
         this.monumentService = monumentService;
+        this.appUserRepository = appUserRepository;
     }
 
     @GetMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})
@@ -94,5 +101,13 @@ public class MonumentController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/{id}/visited")
+    public void addVisit(@PathVariable String monId, Authentication auth){
 
+        AppUser foundUser = appUserRepository.findByHandle(auth.name()).orElseThrow(RuntimeException::new);
+
+        Visit newVisit = new Visit(foundUser.getId(), monId);
+
+        foundUser.addVisit(newVisit);
+    }
 }
