@@ -3,40 +3,30 @@ package be.ordina.talkingstatues.appusers;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/auth")
-public class SecurityController {
+@RequestMapping("/appusers")
+public class AppUserController {
     private final AuthService authService;
 
-
-    public SecurityController(AuthService authService) {
+    public AppUserController(AuthService authService) {
         this.authService = authService;
     }
 
-    @GetMapping("user-info")
-    String getUserInfo(OAuth2AuthenticationToken authentication){
-
-        // Handle
-        if(authentication!=null){
-            return authentication.getName();
-        }
-        return "";
-    }
-
-    @GetMapping("/appusers")
+    @GetMapping("")
     List<AppUser> getAllUsers(){
         return authService.getAllUsersFromDb();
     }
 
-    @GetMapping("/appusers/find/{id}")
+    @GetMapping("/find/{id}")
     AppUser findUserById(@PathVariable String id){
         return authService.getUserById(id);
     }
 
-    @PostMapping("/appusers/add")
+    @PostMapping("/add")
     AppUser addUser(@RequestBody AppUser newUser){
         if(newUser != null){
             return authService.registerUser(newUser);
@@ -46,12 +36,12 @@ public class SecurityController {
         }
     }
 
-    @DeleteMapping("/appusers/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     void deleteFoundUser(@PathVariable String id){
         authService.deleteUserFromDb(id);
     }
 
-    @PutMapping("/appusers/forget/{id}")
+    @PutMapping("/forget/{id}")
     void forgetFoundUser(@PathVariable String id){
         AppUser foundUser = authService.getUserById(id);
 
