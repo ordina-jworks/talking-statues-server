@@ -1,9 +1,13 @@
-package be.ordina.talkingstatues.monuments;
+package be.ordina.talkingstatues.dbpopulation;
+
+import be.ordina.talkingstatues.monuments.Information;
+import be.ordina.talkingstatues.monuments.Language;
+import be.ordina.talkingstatues.monuments.Monument;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MonumentInitialData {
+public class InitialMonumentData {
 
     private static final String neusDescription = "Frans was een grote kerel die bang was van werken.  Hij was niet gehuwd en sliep steeds gekleed op wat zakkengoed.  Hij dacht er niet aan de handen uit de mouwen te steken als hij nog enkele franken op zak had.\n" +
             "In de Spiegelpoort van de Nationalestraat bevond zich de stapelplaats van houthandelaar Blanckaert.  De café's in de buurt hadden aan hem een goede klant.  Frans leed namelijk aan chronische dorst die hij probeerde te lessen met romers \"Pinard\",een soort rode wijn.  Vaste klant was hij in het \"Pinardkot\" op de hoek van de Lange Vlierstraat en het pleintje aan de Nationalestraat.\n" +

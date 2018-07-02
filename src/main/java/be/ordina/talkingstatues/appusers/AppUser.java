@@ -86,4 +86,10 @@ public class AppUser {
         if (this.visits == null) visits = new ArrayList<>();
         this.visits.add(newVisit);
     }
+
+
+    public String toString(){
+        return this.name + " " + this.lastName;
+
+    }
 }

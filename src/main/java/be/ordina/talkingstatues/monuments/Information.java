@@ -57,4 +57,8 @@ public class Information {
     public void setQuestion(List<Question> questions) {
         this.questions = questions;
     }
+
+    public String toString(){
+        return this.name;
+    }
 }
