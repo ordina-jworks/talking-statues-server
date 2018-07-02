@@ -1,5 +1,7 @@
 package be.ordina.talkingstatues.monuments;
 
+import be.ordina.talkingstatues.dbpopulation.InitialMonumentData;
+import be.ordina.talkingstatues.routes.RouteRequest;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.http.MediaType;
@@ -19,16 +21,31 @@ public class MonumentService {
     public MonumentService(MonumentRepository statueRepository, GridFsTemplate gridFsTemplate) {
         this.monumentRepository = statueRepository;
         this.gridFsTemplate = gridFsTemplate;
-        this.initializeData();
     }
 
     public void initializeData() {
         monumentRepository.deleteAll();
-        for (Monument m : MonumentInitialData.DATA) {
+        for (Monument m : InitialMonumentData.DATA) {
             monumentRepository.save(m);
             InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("images/" + m.getPicture());
             saveImage(inputStream, m.getId());
+            System.out.println(m.toString() + "has been saved.\n");
         }
+    }
+
+    public List<Monument> getAllMonuments(){
+        return monumentRepository.findAll();
+    }
+
+    public List<Monument> getSortedMonuments(RouteRequest routeRequest){
+        List<Monument> sortedMonuments =
+                routeRequest.getLocations().stream()
+                        .map(monumentRepository::findById)
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .collect(Collectors.toList())
+                ;
+        return sortedMonuments;
     }
 
     Monument getMonumentById(String id){
