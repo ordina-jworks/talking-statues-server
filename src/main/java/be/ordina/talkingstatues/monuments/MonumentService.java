@@ -1,13 +1,12 @@
 package be.ordina.talkingstatues.monuments;
 
-import be.ordina.talkingstatues.dbpopulation.InitialMonumentData;
 import be.ordina.talkingstatues.routes.RouteRequest;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,13 +22,13 @@ public class MonumentService {
         this.gridFsTemplate = gridFsTemplate;
     }
 
-    public void initializeData() {
+    public void initializeData(Monument[] initialData) {
         monumentRepository.deleteAll();
-        for (Monument m : InitialMonumentData.DATA) {
+        for (Monument m : initialData) {
             monumentRepository.save(m);
             InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("images/" + m.getPicture());
             saveImage(inputStream, m.getId());
-            System.out.println(m.toString() + "has been saved.\n");
+       //     System.out.println(m.toString() + " has been saved.\n");
         }
     }
 

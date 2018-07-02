@@ -4,8 +4,10 @@ import be.ordina.talkingstatues.appusers.AppUser;
 import be.ordina.talkingstatues.appusers.AuthService;
 import be.ordina.talkingstatues.monuments.Monument;
 import be.ordina.talkingstatues.monuments.MonumentService;
+import be.ordina.talkingstatues.security.ApplicationConfigurationUtils;
 import be.ordina.talkingstatues.visits.Visit;
 import be.ordina.talkingstatues.visits.VisitService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,35 +21,28 @@ public class PopulationService {
     private final AuthService authService;
     private final VisitService visitService;
 
-    /*@Value("${be.ordina.talkingstatues.initialdata.monuments}")
-    private boolean initialDataMonuments;
+    private ApplicationConfigurationUtils utils;
 
-    @Value("true")
-    private boolean initialDataAppUsers;
-
-    @Value("${be.ordina.talkingstatues.initialdata.addvisits}")
-    private boolean addVisits;*/
 
     private final List<Monument> allMonuments;
 
-    public PopulationService(MonumentService monumentService, AuthService authService, VisitService visitService) {
+    public PopulationService(MonumentService monumentService, AuthService authService, VisitService visitService, ApplicationConfigurationUtils utils) {
         this.monumentService = monumentService;
         this.authService = authService;
         this.allMonuments = monumentService.getAllMonuments();
         this.visitService = visitService;
+        this.utils = utils;
 
-        /*if (initialDataMonuments) {  */
-            monumentService.initializeData();
-        /*}*/
+        if (Boolean.parseBoolean(utils.getProperty(ApplicationConfigurationUtils.INITIAL_DATA_MONUMENTS_KEY))) {
+            System.out.println("Adding initial data for Monuments to DB...");
+            monumentService.initializeData(InitialMonumentData.DATA);
+        }
 
-        /*if(initialDataAppUsers){ */
-            authService.initializeUserData();
-        /*} */
-
-        /*if(addVisits){ */
+        if (Boolean.parseBoolean(utils.getProperty(ApplicationConfigurationUtils.INITIAL_DATA_VISITS_KEY))) {
+            System.out.println("Adding initial data for Visits and Users to DB...");
+            authService.initializeUserData(InitialUserData.DATA);
             addVisitsToUsers();
-        /*} */
-
+        }
 
     }
 

@@ -1,6 +1,5 @@
 package be.ordina.talkingstatues.appusers;
 
-import be.ordina.talkingstatues.dbpopulation.InitialUserData;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +15,12 @@ public class AuthService {
         this.appUserRepository = appUserRepository;
     }
 
-    public void initializeUserData(){
+    public void initializeUserData(AppUser[] initialData ){
         appUserRepository.deleteAll();
 
-        for(AppUser usr: InitialUserData.DATA){
+        for(AppUser usr: initialData){
             appUserRepository.save(usr);
-            System.out.println(usr.toString() + " has been saved.\n");
+            // System.out.println(usr.toString() + " has been saved.\n");
         }
     }
 
