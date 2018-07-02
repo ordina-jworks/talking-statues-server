@@ -1,7 +1,7 @@
 package be.ordina.talkingstatues.routes;
 
 import be.ordina.talkingstatues.monuments.Monument;
-import be.ordina.talkingstatues.monuments.MonumentRepository;
+import be.ordina.talkingstatues.monuments.MonumentService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,13 +12,13 @@ public class RouteService {
 
 
     private final RouteRepository routeRepository;
-    private final MonumentRepository monumentRepository;
+    private final MonumentService monumentService;
 
-    public RouteService(RouteRepository routeRepository, MonumentRepository monumentRepository) {
+    public RouteService(RouteRepository routeRepository, MonumentService monumentService) {
         this.routeRepository = routeRepository;
-        this.monumentRepository = monumentRepository;
+        this.monumentService = monumentService;
 
-        List<Monument> monuments = monumentRepository.findAll();
+        List<Monument> monuments = monumentService.getAllMonuments();
         System.out.println(monuments);
     }
 
@@ -35,14 +35,8 @@ public class RouteService {
        if(routeRequest.getLocations()==null){
             routeRequest.setLocations(new ArrayList<>());
        }
-       List<Monument> sortedMonuments =
-               routeRequest.getLocations().stream()
-                       .map(monumentRepository::findById)
-                       .filter(Optional::isPresent)
-                       .map(Optional::get)
-                       .collect(Collectors.toList())
-       ;
-       return routeRepository.save(new Route(routeRequest.getName(),sortedMonuments));
+
+       return routeRepository.save(new Route(routeRequest.getName(), monumentService.getSortedMonuments(routeRequest)));
     }
 
 

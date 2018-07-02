@@ -28,6 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
+                // Alle requests toestaan ==> in comment zetten om Authenticate terug te laten werken
+                .antMatchers("/**").permitAll()
              //   .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()

@@ -1,7 +1,7 @@
 package be.ordina.talkingstatues.monuments;
 
 import be.ordina.talkingstatues.appusers.AppUser;
-import be.ordina.talkingstatues.appusers.AppUserRepository;
+import be.ordina.talkingstatues.appusers.AuthService;
 import be.ordina.talkingstatues.visits.Visit;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -22,11 +22,11 @@ import java.util.*;
 public class MonumentController {
 
     private final MonumentService monumentService;
-    private final AppUserRepository appUserRepository;
+    private final AuthService authService;
 
-    public MonumentController(MonumentService monumentService, AppUserRepository appUserRepository) {
+    public MonumentController(MonumentService monumentService, AuthService authService) {
         this.monumentService = monumentService;
-        this.appUserRepository = appUserRepository;
+        this.authService = authService;
     }
 
     @GetMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})
@@ -127,8 +127,7 @@ public class MonumentController {
 
     @PostMapping("/{id}/visited")
     public void addVisit(@PathVariable String monId, Authentication auth){
-
-        AppUser foundUser = appUserRepository.findByHandle(auth.name()).orElseThrow(RuntimeException::new);
+        AppUser foundUser = authService.getUserByHandle(auth.name());
 
         Visit newVisit = new Visit(foundUser.getId(), monId);
 
