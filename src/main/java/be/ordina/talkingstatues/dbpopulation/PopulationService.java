@@ -19,14 +19,14 @@ public class PopulationService {
     private final AuthService authService;
     private final VisitService visitService;
 
-    @Value("be.ordina.talkingstatues.initialdata.monuments")
+    /*@Value("${be.ordina.talkingstatues.initialdata.monuments}")
     private boolean initialDataMonuments;
 
-    @Value("be.ordina.talkingstatues.initialdata.appusers")
+    @Value("true")
     private boolean initialDataAppUsers;
 
-    @Value("be.ordina.talkingstatues.initialdata.addvisits")
-    private boolean addVisits;
+    @Value("${be.ordina.talkingstatues.initialdata.addvisits}")
+    private boolean addVisits;*/
 
     private final List<Monument> allMonuments;
 
@@ -36,17 +36,17 @@ public class PopulationService {
         this.allMonuments = monumentService.getAllMonuments();
         this.visitService = visitService;
 
-        if (initialDataMonuments) {
+        /*if (initialDataMonuments) {  */
             monumentService.initializeData();
-        }
+        /*}*/
 
-        if(initialDataAppUsers){
+        /*if(initialDataAppUsers){ */
             authService.initializeUserData();
-        }
+        /*} */
 
-        if(addVisits){
+        /*if(addVisits){ */
             addVisitsToUsers();
-        }
+        /*} */
 
 
     }
