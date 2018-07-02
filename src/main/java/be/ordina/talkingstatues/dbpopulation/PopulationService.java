@@ -18,8 +18,15 @@ public class PopulationService {
     private final MonumentService monumentService;
     private final AuthService authService;
     private final VisitService visitService;
+
     @Value("be.ordina.talkingstatues.initialdata.monuments")
     private boolean initialDataMonuments;
+
+    @Value("be.ordina.talkingstatues.initialdata.appusers")
+    private boolean initialDataAppUsers;
+
+    @Value("be.ordina.talkingstatues.initialdata.addvisits")
+    private boolean addVisits;
 
     private final List<Monument> allMonuments;
 
@@ -33,8 +40,14 @@ public class PopulationService {
             monumentService.initializeData();
         }
 
-        authService.initializeUserData();
-        /*addVisitsToUsers();*/
+        if(initialDataAppUsers){
+            authService.initializeUserData();
+        }
+
+        if(addVisits){
+            addVisitsToUsers();
+        }
+
 
     }
 
