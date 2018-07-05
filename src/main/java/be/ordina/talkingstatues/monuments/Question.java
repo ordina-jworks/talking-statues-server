@@ -10,6 +10,7 @@ public class Question {
     private String answer;
 
     public Question() {
+
     }
 
     public Question(@NotEmpty String question, @NotEmpty String answer) {
@@ -19,6 +20,7 @@ public class Question {
     public String getQuestion() {
         return question;
     }
+
 
     public void setQuestion(String question) {
         this.question = question;

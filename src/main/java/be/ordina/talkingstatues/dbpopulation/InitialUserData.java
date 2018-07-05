@@ -5,7 +5,7 @@ import be.ordina.talkingstatues.appusers.AppUser;
 public class InitialUserData {
 
     public static final AppUser[] DATA = new AppUser[]{
-            new AppUser("newUser1 ", "Jimmy", "Fallon"),
+            new AppUser("newUser1", "Jimmy", "Fallon"),
             new AppUser("newUser2", "Jos", "Vermeiren"),
             new AppUser("newUser3", "Eric", "slkfje"),
             new AppUser("newUser4", "Peter", "lizdlij"),
@@ -17,5 +17,4 @@ public class InitialUserData {
             new AppUser("newUser10", "Joachim", "poekfpejoiehd"),
             new AppUser("newUser11", "Jef", "Willems")
     };
-
 }
