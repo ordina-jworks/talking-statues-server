@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class Securityhandler extends SavedRequestAwareAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class SecuritySuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    public Securityhandler() {
+    public SecuritySuccessHandler() {
         super();
         this.setUseReferer(true);
     }
@@ -28,8 +28,6 @@ public class Securityhandler extends SavedRequestAwareAuthenticationSuccessHandl
         if (authentication instanceof OAuth2AuthenticationToken) {
             OAuth2AuthenticationToken securityToken =(OAuth2AuthenticationToken) authentication;
             System.out.println("Authorization Server: ["  + securityToken.getAuthorizedClientRegistrationId() + "]");
-        } else {
-//           response.sendRedirect(request.getHeader("referer"));
         }
         super.onAuthenticationSuccess(request, response, authentication);
     }

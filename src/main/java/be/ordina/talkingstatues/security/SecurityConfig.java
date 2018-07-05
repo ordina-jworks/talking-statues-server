@@ -20,29 +20,27 @@ import java.util.Collections;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    Securityhandler successHandler ;
+    SecuritySuccessHandler successHandler ;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        System.out.println("Entering Security Setup...");
         http
+          //      .exceptionHandling().accessDeniedHandler(new SecurityAccessDeniedHandler())
+          //      .and()
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                // Alle requests toestaan ==> in comment zetten om Authenticate terug te laten werken
-                .antMatchers("/**").permitAll()
+                .antMatchers("/images/**").permitAll()
              //   .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
-       /*         .and()
-                .formLogin()
-                .loginPage("/login")
+                .and()
+                .oauth2Login()
+   //             .loginPage("/auth/denied").permitAll()
                 .successHandler(successHandler)
-                .permitAll() */
-        //        .and()
-         //       .oauth2Login()
-                // .loginPage("/login")
-         //       .successHandler(successHandler)
                 .and().logout()
                 .logoutUrl("/logout")
                 .invalidateHttpSession(true)
@@ -50,9 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe()
                 .rememberMeParameter("rememberMe")
                // .tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(60 * 60 * 24 * 7); // 1 week validity
+                .tokenValiditySeconds(60 * 60 * 24 * 7) // 1 week validity
         ;
-
     }
 
     @Bean @Override

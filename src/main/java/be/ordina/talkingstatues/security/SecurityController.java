@@ -2,6 +2,8 @@ package be.ordina.talkingstatues.security;
 
 import be.ordina.talkingstatues.appusers.AppUser;
 import be.ordina.talkingstatues.appusers.AuthService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +22,9 @@ public class SecurityController {
         this.authService = authService;
     }
 
-    @GetMapping("/user-info")
-    String getUserInfo(OAuth2AuthenticationToken authentication){
-
-        // Handle
-        if(authentication!=null){
-            return authentication.getName();
-        }
-        return "";
+    @GetMapping("/denied")
+    public ResponseEntity accessDenied() {
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
 
     @GetMapping("/user")
