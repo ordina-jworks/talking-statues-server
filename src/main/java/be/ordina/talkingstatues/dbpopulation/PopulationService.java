@@ -46,7 +46,6 @@ public class PopulationService {
 
     }
 
-
     public void addVisitsToUsers() {
         List<AppUser> foundUsers = authService.getAllUsersFromDb();
         int count = 0;

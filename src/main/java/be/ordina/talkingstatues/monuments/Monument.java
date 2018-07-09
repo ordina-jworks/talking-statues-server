@@ -82,6 +82,12 @@ public class Monument {
         this.picture = picture;
     }
 
+    public void addInformationObject(Information info){
+        if(info != null){
+            this.information.add(info);
+        }
+    }
+
     public String toString(){
         return information.toString() + " in " + this.area + " lat: " + this.latitude + " long: " + this.longitude;
     }

@@ -13,6 +13,7 @@ public class Information {
     private String name;
     @NotEmpty
     private String description;
+
     private List<Question> questions;
 
     public Information() {

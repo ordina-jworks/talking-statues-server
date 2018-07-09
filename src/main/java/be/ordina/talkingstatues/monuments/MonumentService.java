@@ -47,6 +47,8 @@ public class MonumentService {
         return sortedMonuments;
     }
 
+
+
     Monument getMonumentById(String id){
         return monumentRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Monument with id: "+id+" does not exist"));
@@ -96,6 +98,15 @@ public class MonumentService {
             return monumentRepository.save(monument);
         }else {
             throw new RuntimeException("the new monument already has an id");
+        }
+    }
+
+    void addInformationToMonument(String monId, Information info){
+        Monument foundMonument = getMonumentById(monId);
+
+        if(monId != "" && info != null){
+            foundMonument.addInformationObject(info);
+            monumentRepository.save(foundMonument);
         }
     }
 

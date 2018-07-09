@@ -86,6 +86,11 @@ public class MonumentController {
 
     //ADMIN
 
+    @PostMapping(value = "/{id}/information")
+    public void addInformationToMonument(@PathVariable String monId, @RequestBody Information info){
+        monumentService.addInformationToMonument(monId, info);
+    }
+
     @GetMapping(value = "")
     List<Monument> getMonuments(){
         return monumentService.findAll();
