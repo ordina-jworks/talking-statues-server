@@ -94,6 +94,11 @@ public class MonumentController {
         monumentService.addInformationToMonument(monId, info);
     }
 
+    @PutMapping(value = "/{id}/chat")
+    public String chatWithMonument(@PathVariable String monumentId, @RequestBody String userInput) {
+        return monumentService.chatWithMonument(monumentId, userInput);
+    }
+
     @GetMapping(value = "")
     List<Monument> getMonuments() {
         return monumentService.findAll();
