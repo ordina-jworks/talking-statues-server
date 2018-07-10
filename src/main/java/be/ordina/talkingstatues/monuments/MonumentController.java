@@ -79,10 +79,10 @@ public class MonumentController {
     }
 
     @GetMapping(value = "/selection", produces = {"application/vnd.ordina.v1.0+json"})
-    List<SwipeMonument> getRandomSelection(@RequestParam String area, @RequestParam("lang") String language){
+    @JsonView(Aspects.MinimalMonumentAspect.class)
+    List<Monument> getRandomSelection(@RequestParam String area, @RequestParam("lang") String language) {
         return monumentService.getRandomSelection(area,language);
     }
-
 
     //ADMIN
 
@@ -93,11 +93,6 @@ public class MonumentController {
 
     @GetMapping(value = "")
     List<Monument> getMonuments(){
-        return monumentService.findAll();
-    }
-
-    @GetMapping(value = "/short") @JsonView(Aspects.MinimalMonumentAspect.class)
-    List<Monument> getMonumentsShort(){
         return monumentService.findAll();
     }
 

@@ -72,22 +72,17 @@ public class MonumentService {
         return Collections.max(questionMap.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
     }
 
-    List<SwipeMonument> getRandomSelection(String area, String language){
-        List<SwipeMonument> monuments = monumentRepository.findAllByArea(area).stream()
+
+    List<Monument> getRandomSelection(String area, String language){
+        List<Monument> monuments = monumentRepository.findAllByArea(area).stream()
                 .peek(monument -> monument.setInformation(monument.getInformation().stream()
                         .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))
                         .collect(Collectors.toList())))
-                .map(i-> new SwipeMonument(i.getId(),i.getInformation().get(0).getName()))
                 .collect(Collectors.toList());
         Collections.shuffle(monuments);
-        if(monuments.size() >=10){
-            return IntStream.range(0,10)
-                    .mapToObj(monuments::get)
-                    .collect(Collectors.toList());
-        }else {
-            return monuments;
-        }
+        return monuments.size() >= 10 ? IntStream.range(0,10).mapToObj(monuments::get).collect(Collectors.toList()) : monuments;
     }
+
 
     List<Monument> findAll(){
         return monumentRepository.findAll();
