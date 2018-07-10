@@ -30,7 +30,7 @@ public class AuthService {
 
     public AppUser getUserByHandle(String handle){
         return appUserRepository.findByHandle(handle)
-                .orElseThrow(()->new RuntimeException("user not found"));
+                .orElseThrow(() -> new RuntimeException("user not found"));
     }
 
     public List<AppUser> getAllUsersFromDb(){
@@ -42,7 +42,7 @@ public class AuthService {
     }
 
     public AppUser getUserById(String id){
-        return appUserRepository.findById(id).orElseThrow(()->new RuntimeException("user not present"));
+        return appUserRepository.findById(id).orElseThrow(()  -> new RuntimeException("user not present"));
     }
 
 }

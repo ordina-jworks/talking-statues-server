@@ -29,7 +29,7 @@ public class RouteController {
     ResponseEntity<Route> createRoute(@RequestBody RouteRequest routeRequest){
         Route savedRoute = routeService.create(routeRequest);
         System.out.println("SavedRoute = " + savedRoute + " RouteRequest = " + routeRequest);
-        return new ResponseEntity<>(savedRoute,HttpStatus.CREATED);
+        return new ResponseEntity<>(savedRoute, HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})

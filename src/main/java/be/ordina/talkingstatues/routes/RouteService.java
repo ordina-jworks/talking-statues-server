@@ -32,7 +32,7 @@ public class RouteService {
     }
 
     public Route create(RouteRequest routeRequest) {
-       if(routeRequest.getLocations()==null){
+       if(routeRequest.getLocations() == null){
             routeRequest.setLocations(new ArrayList<>());
        }
 

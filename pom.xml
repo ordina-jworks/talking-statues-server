@@ -66,6 +66,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>Ab</groupId>
+            <artifactId>com.google</artifactId>
+            <version>0.0.4.3</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.reflections</groupId>
@@ -91,6 +96,28 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<artifactId>com.google</artifactId>
+					<groupId>Ab</groupId>
+					<version>0.0.4.3</version>
+					<packaging>jar</packaging>
+					<file>${basedir}/lib/Ab.jar</file>
+					<generatePom>true</generatePom>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install-jar-lib</id>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

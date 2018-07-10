@@ -8,6 +8,7 @@ import java.util.List;
 
 @Document(collection = "monuments")
 public class Monument {
+
     @Id @JsonView(Aspects.MinimalMonumentAspect.class)
     private String id;
     @NotEmpty @JsonView(Aspects.MinimalMonumentAspect.class)
