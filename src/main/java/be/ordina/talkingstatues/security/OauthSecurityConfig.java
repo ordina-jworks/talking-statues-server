@@ -1,6 +1,5 @@
 package be.ordina.talkingstatues.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,37 +16,31 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    SecuritySuccessHandler successHandler ;
-
+public class OauthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println("Entering Security Setup...");
         http
-          //      .exceptionHandling().accessDeniedHandler(new SecurityAccessDeniedHandler())
-          //      .and()
                 .cors().and()
                 .csrf().disable()
+//                .requestMatcher(request -> {
+//                    String auth = request.getHeader(HttpHeaders.AUTHORIZATION);
+//                    return (auth != null && auth.startsWith("Basic "));
+//                })
                 .authorizeRequests()
                 .antMatchers("/images/**").permitAll()
-             //   .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
                 .and()
                 .oauth2Login()
-   //             .loginPage("/auth/denied").permitAll()
-                .successHandler(successHandler)
                 .and().logout()
                 .logoutUrl("/logout")
                 .invalidateHttpSession(true)
                 .and()
                 .rememberMe()
                 .rememberMeParameter("rememberMe")
-               // .tokenRepository(persistentTokenRepository())
+                // .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(60 * 60 * 24 * 7) // 1 week validity
         ;
     }
@@ -76,12 +69,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 
-    /*
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
-        db.setDataSource(dataSource);
-        return db;
-    }
-    */
+
 }

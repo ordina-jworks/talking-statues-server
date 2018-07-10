@@ -1,9 +1,7 @@
 package be.ordina.talkingstatues.appusers;
 
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 
