@@ -1,4 +1,5 @@
 package be.ordina.talkingstatues.routes;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +17,17 @@ public class RouteController {
     }
 
     @GetMapping(value = "", produces = {"application/vnd.ordina.v1.0+json"})
-    List<Route> getAllRoutes(){
+    List<Route> getAllRoutes() {
         return routeService.getRoutes();
     }
 
     @GetMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})
-    Route getRoute(@PathVariable String id){
+    Route getRoute(@PathVariable String id) {
         return routeService.getRouteById(id);
     }
 
-    @PostMapping(value = "", produces = {"application/vnd.ordina.v1.0+json"})
-    ResponseEntity<Route> createRoute(@RequestBody RouteRequest routeRequest){
+    @PutMapping(value = "", produces = {"application/vnd.ordina.v1.0+json"})
+    ResponseEntity<Route> createRoute(@RequestBody RouteRequest routeRequest) {
         Route savedRoute = routeService.create(routeRequest);
         System.out.println("SavedRoute = " + savedRoute + " RouteRequest = " + routeRequest);
         return new ResponseEntity<>(savedRoute, HttpStatus.CREATED);
@@ -34,7 +35,7 @@ public class RouteController {
 
     @DeleteMapping(value = "/{id}", produces = {"application/vnd.ordina.v1.0+json"})
     @ResponseBody
-    ResponseEntity deleteRoute(@PathVariable String id){
+    ResponseEntity deleteRoute(@PathVariable String id) {
         routeService.deleteRoute(id);
         return ResponseEntity.ok().build();
 

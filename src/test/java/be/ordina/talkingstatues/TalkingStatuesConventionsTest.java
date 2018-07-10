@@ -4,12 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -31,6 +28,6 @@ public class TalkingStatuesConventionsTest {
                 System.out.println("Flagging [" + m.getDeclaringClass().getCanonicalName() + "#" + m.getName() + "] with incorrect use of @PostMapping.");
             }
         }
-        Assert.assertTrue("Found " + methods.size() + " violations.", methods.size() == 0 );
+        Assert.assertEquals("Found " + methods.size() + " violations.", 0, methods.size());
     }
 }

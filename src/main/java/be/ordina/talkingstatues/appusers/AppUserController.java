@@ -15,32 +15,31 @@ public class AppUserController {
     }
 
     @GetMapping("")
-    List<AppUser> getAllUsers(){
+    List<AppUser> getAllUsers() {
         return authService.getAllUsersFromDb();
     }
 
     @GetMapping("/find/{id}")
-    AppUser findUserById(@PathVariable String id){
+    AppUser findUserById(@PathVariable String id) {
         return authService.getUserById(id);
     }
 
-    @PostMapping("/add")
-    AppUser addUser(@RequestBody AppUser newUser){
-        if(newUser != null){
+    @PutMapping("/add")
+    AppUser addUser(@RequestBody AppUser newUser) {
+        if (newUser != null) {
             return authService.registerUser(newUser);
-        }
-        else {
+        } else {
             return null;
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    void deleteFoundUser(@PathVariable String id){
+    void deleteFoundUser(@PathVariable String id) {
         authService.deleteUserFromDb(id);
     }
 
     @PutMapping("/forget/{id}")
-    void forgetFoundUser(@PathVariable String id){
+    void forgetFoundUser(@PathVariable String id) {
         AppUser foundUser = authService.getUserById(id);
 
         foundUser.setHandle("");

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,16 +33,15 @@ public class SecurityController {
     }
 
 
-    @PostMapping("/user/create")
-    public void userCreation(OAuth2AuthenticationToken auth){
+    @PutMapping("/user/create")
+    public void userCreation(OAuth2AuthenticationToken auth) {
         String username[];
 
-        if(auth.isAuthenticated()){
+        if (auth.isAuthenticated()) {
             username = auth.getPrincipal().getAttributes().get("name").toString().split(" ");
             authService.registerUser(new AppUser(auth.getPrincipal().getName(), username[0], username[1]));
         }
     }
-
 
 
 }
