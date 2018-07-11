@@ -16,8 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -92,6 +91,23 @@ public class MonumentController {
     @PutMapping(value = "/{id}/information")
     public void addInformationToMonument(@PathVariable String monId, @RequestBody Information info) {
         monumentService.addInformationToMonument(monId, info);
+    }
+
+    @GetMapping(value= "/areas")
+    List<String> getAllAreas(){
+        List<Monument> monuments = monumentService.getAllMonuments();
+        List<String> areas = new ArrayList<>();
+        Set<String> hs = new HashSet<>();
+
+        for(Monument mons : monuments){
+            areas.add(mons.getArea());
+        }
+
+        hs.addAll(areas);
+        areas.clear();
+        areas.addAll(hs);
+
+        return areas;
     }
 
     @PutMapping(value = "/{id}/chat")
