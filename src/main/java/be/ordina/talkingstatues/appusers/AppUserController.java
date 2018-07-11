@@ -1,5 +1,6 @@
 package be.ordina.talkingstatues.appusers;
 
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,16 @@ public class AppUserController {
             return authService.registerUser(newUser);
         } else {
             return null;
+        }
+    }
+
+    @PutMapping("/create")
+    public void userCreation(OAuth2AuthenticationToken auth) {
+        String username[];
+
+        if (auth.isAuthenticated()) {
+            username = auth.getPrincipal().getAttributes().get("name").toString().split(" ", 2);
+            authService.registerUser(new AppUser(auth.getPrincipal().getName(), username[0], username[1]));
         }
     }
 
