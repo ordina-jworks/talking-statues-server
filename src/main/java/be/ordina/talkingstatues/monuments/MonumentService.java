@@ -1,5 +1,6 @@
 package be.ordina.talkingstatues.monuments;
 
+import be.ordina.talkingstatues.chatbot.ChatBotService;
 import be.ordina.talkingstatues.routes.RouteRequest;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
@@ -16,10 +17,12 @@ public class MonumentService {
 
     private final MonumentRepository monumentRepository;
     private final GridFsTemplate gridFsTemplate;
+    private final ChatBotService chatBotService;
 
-    public MonumentService(MonumentRepository statueRepository, GridFsTemplate gridFsTemplate) {
+    public MonumentService(MonumentRepository statueRepository, GridFsTemplate gridFsTemplate, ChatBotService chatBotService) {
         this.monumentRepository = statueRepository;
         this.gridFsTemplate = gridFsTemplate;
+        this.chatBotService = chatBotService;
     }
 
     public void initializeData(Monument[] initialData) {
@@ -122,5 +125,10 @@ public class MonumentService {
 
     GridFsResource getImageForMonumentId(String id){
         return gridFsTemplate.getResource(id);
+    }
+
+    String chatWithMonument(String monumentId, String userInput) {
+        Monument monument = getMonumentById(monumentId);
+        return chatBotService.processUserInput(userInput);
     }
 }
