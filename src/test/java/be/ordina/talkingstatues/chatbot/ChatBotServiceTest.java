@@ -15,7 +15,7 @@ public class ChatBotServiceTest {
 
     @Test
     public void chat() {
-        String response = chatBotService.processUserInput("What's your name?");
+        String response = chatBotService.chat("What's your name?");
 
         assertTrue(response.contains("SUPER"));
     }
@@ -23,6 +23,6 @@ public class ChatBotServiceTest {
     @Test
     public void chat_emptyInput_throwsException() {
         expectedException.expect(IllegalArgumentException.class);
-        chatBotService.processUserInput("");
+        chatBotService.chat("");
     }
 }

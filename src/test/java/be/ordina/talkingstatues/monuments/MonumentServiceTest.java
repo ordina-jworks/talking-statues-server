@@ -35,7 +35,7 @@ public class MonumentServiceTest {
         Monument monument = new Monument();
         monument.setId("1");
 
-        when(chatBotService.processUserInput("Hi")).thenReturn(expected);
+        when(chatBotService.chat("Hi")).thenReturn(expected);
         when(monumentRepository.findById("1")).thenReturn(Optional.of(monument));
 
         String actual = monumentService.chatWithMonument("1", "Hi");

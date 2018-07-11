@@ -129,6 +129,6 @@ public class MonumentService {
 
     String chatWithMonument(String monumentId, String userInput) {
         Monument monument = getMonumentById(monumentId);
-        return chatBotService.processUserInput(userInput);
+        return chatBotService.chat(userInput);
     }
 }
