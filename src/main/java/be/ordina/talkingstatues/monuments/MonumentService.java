@@ -92,7 +92,7 @@ public class MonumentService {
     }
 
     Monument addMonument(Monument monument){
-        if(monument.getId()==null){
+        if(monument.getId() == null){
             return monumentRepository.save(monument);
         }else {
             throw new RuntimeException("the new monument already has an id");
