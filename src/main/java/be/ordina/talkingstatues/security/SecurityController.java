@@ -32,16 +32,4 @@ public class SecurityController {
         return user;
     }
 
-
-    @PutMapping("/user/create")
-    public void userCreation(OAuth2AuthenticationToken auth) {
-        String username[];
-
-        if (auth.isAuthenticated()) {
-            username = auth.getPrincipal().getAttributes().get("name").toString().split(" ");
-            authService.registerUser(new AppUser(auth.getPrincipal().getName(), username[0], username[1]));
-        }
-    }
-
-
 }
