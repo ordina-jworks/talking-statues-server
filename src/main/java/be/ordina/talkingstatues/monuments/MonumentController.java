@@ -126,7 +126,7 @@ public class MonumentController {
     }
 
     @PutMapping(value = "/{id}")
-    void addMonuments(@PathVariable String id, @RequestBody Monument monument) {
+    void editMonument(@PathVariable String id, @RequestBody Monument monument) {
         monument.setId(id);
         monumentService.putMonument(id, monument);
     }
