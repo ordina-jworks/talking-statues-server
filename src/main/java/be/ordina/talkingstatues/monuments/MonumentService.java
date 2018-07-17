@@ -127,8 +127,10 @@ public class MonumentService {
         return gridFsTemplate.getResource(id);
     }
 
+    /*
     String chatWithMonument(String monumentId, String userInput) {
         Monument monument = getMonumentById(monumentId);
         return chatBotService.chat(userInput);
     }
+    */
 }

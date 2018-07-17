@@ -29,6 +29,7 @@ public class MonumentServiceTest {
     @InjectMocks
     private MonumentService monumentService;
 
+    /*
     @Test
     public void chatWithMonument() {
         final String expected = "Hi! It's delightful to see you.";
@@ -42,4 +43,5 @@ public class MonumentServiceTest {
 
         assertEquals(actual, expected);
     }
+    */
 }

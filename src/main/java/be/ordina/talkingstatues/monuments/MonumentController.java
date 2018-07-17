@@ -112,7 +112,7 @@ public class MonumentController {
 
     @PutMapping(value = "/{id}/chat")
     public String chatWithMonument(@PathVariable String id, @RequestBody String userInput) {
-        return monumentService.chatWithMonument(id, userInput);
+        return "Hello, User."; //monumentService.chatWithMonument(id, userInput);
     }
 
     @GetMapping(value = "")
