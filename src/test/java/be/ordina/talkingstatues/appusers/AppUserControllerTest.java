@@ -18,6 +18,7 @@ import java.util.Set;
 
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.*;
 
@@ -28,7 +29,7 @@ public class AppUserControllerTest {
     private static final String LAST_NAME = "aLastName";
     private static final AppUser APP_USER = new AppUser(HANDLE, NAME, LAST_NAME);
     private static final String ID = "anId";
-    public static final String PRINCIPAL = "principal";
+    private static final String PRINCIPAL = "principal";
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -65,6 +66,13 @@ public class AppUserControllerTest {
         AppUser actual = appUserController.addUser(APP_USER);
 
         assertEquals(APP_USER, actual);
+    }
+
+    @Test
+    public void addUser_null() {
+        AppUser actual = appUserController.addUser(null);
+
+        assertNull(actual);
     }
 
     @Test

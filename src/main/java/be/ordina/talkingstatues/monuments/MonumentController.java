@@ -5,7 +5,6 @@ import be.ordina.talkingstatues.appusers.AuthService;
 import be.ordina.talkingstatues.visits.Visit;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,10 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -45,31 +45,15 @@ public class MonumentController {
 
     @GetMapping(value = "/{id}/image64")
     ResponseEntity getImageBase64(@PathVariable String id) {
-        GridFsResource res = monumentService.getImageForMonumentId(id);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION)
-                .body(new Image(encoder(res)));
-    }
-
-    private String encoder(GridFsResource resource) {
-        String base64Image = "";
-        try {
-            InputStream imageInFile = resource.getInputStream();
-            byte imageData[] = new byte[1024 * 1024];
-            imageInFile.read(imageData);
-            base64Image = Base64.getEncoder().encodeToString(imageData);
-        } catch (FileNotFoundException e) {
-            System.out.println("Image not found" + e);
-        } catch (IOException ioe) {
-            System.out.println("Exception while reading the Image " + ioe);
-        }
-        return base64Image;
+                .body(monumentService.getImageForMonumentId(id));
     }
 
     @GetMapping(value = "/{id}/information", produces = {"application/vnd.ordina.v1.0+json"})
     Information getMonumentInformation(@PathVariable String id, @RequestParam("lang") String language) {
         Information information = monumentService.getMonumentInformationByIdAndLanguage(id, language);
-        information.setQuestion(null);
+        information.setQuestions(null);
         return information;
     }
 
@@ -93,13 +77,13 @@ public class MonumentController {
         monumentService.addInformationToMonument(monId, info);
     }
 
-    @GetMapping(value= "/areas")
-    List<String> getAllAreas(){
+    @GetMapping(value = "/areas")
+    List<String> getAllAreas() {
         List<Monument> monuments = monumentService.getAllMonuments();
         List<String> areas = new ArrayList<>();
         Set<String> hs = new HashSet<>();
 
-        for(Monument mons : monuments){
+        for (Monument mons : monuments) {
             areas.add(mons.getArea());
         }
 

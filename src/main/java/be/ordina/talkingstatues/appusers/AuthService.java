@@ -4,8 +4,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
-
 @Service
 public class AuthService {
 
@@ -15,34 +13,35 @@ public class AuthService {
         this.appUserRepository = appUserRepository;
     }
 
-    public void initializeUserData(AppUser[] initialData ){
+    public void initializeUserData(AppUser[] initialData) {
         appUserRepository.deleteAll();
 
-        for(AppUser usr: initialData){
+        for (AppUser usr : initialData) {
             appUserRepository.save(usr);
             // System.out.println(usr.toString() + " has been saved.\n");
         }
     }
 
-    public AppUser registerUser(AppUser appUser){
+    public AppUser registerUser(AppUser appUser) {
         return appUserRepository.save(appUser);
     }
 
-    public AppUser getUserByHandle(String handle){
+    public AppUser getUserByHandle(String handle) {
         return appUserRepository.findByHandle(handle)
                 .orElseThrow(() -> new RuntimeException("user not found"));
     }
 
-    public List<AppUser> getAllUsersFromDb(){
+    public List<AppUser> getAllUsersFromDb() {
         return appUserRepository.findAll();
     }
 
-    public void deleteUserFromDb(String id){
+    public void deleteUserFromDb(String id) {
         appUserRepository.deleteById(id);
     }
 
-    public AppUser getUserById(String id){
-        return appUserRepository.findById(id).orElseThrow(()  -> new RuntimeException("user not present"));
+    public AppUser getUserById(String id) {
+        return appUserRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("user not present"));
     }
 
 }
