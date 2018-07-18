@@ -1,36 +1,34 @@
 package be.ordina.talkingstatues.monuments;
 
-import be.ordina.talkingstatues.chatbot.ChatBotService;
 import be.ordina.talkingstatues.routes.RouteRequest;
+import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.InputStream;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class MonumentService {
 
     private final MonumentRepository monumentRepository;
     private final GridFsTemplate gridFsTemplate;
-    private final ChatBotService chatBotService;
 
-    public MonumentService(MonumentRepository statueRepository, GridFsTemplate gridFsTemplate, ChatBotService chatBotService) {
+    public MonumentService(MonumentRepository statueRepository, GridFsTemplate gridFsTemplate) {
         this.monumentRepository = statueRepository;
         this.gridFsTemplate = gridFsTemplate;
-        this.chatBotService = chatBotService;
     }
 
-    public void initializeData(Monument[] initialData) {
+    public void initializeData(List<Monument> initialData) {
         monumentRepository.deleteAll();
         for (Monument m : initialData) {
             monumentRepository.save(m);
             InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("images/" + m.getPicture());
-            saveImage(inputStream, m.getId());
+            saveImage(inputStream, m.getPicture());
             //     System.out.println(m.toString() + " has been saved.\n");
         }
     }
@@ -39,14 +37,12 @@ public class MonumentService {
         return monumentRepository.findAll();
     }
 
-    public List<Monument> getSortedMonuments(RouteRequest routeRequest) {
-        List<Monument> sortedMonuments =
-                routeRequest.getLocations().stream()
-                        .map(monumentRepository::findById)
-                        .filter(Optional::isPresent)
-                        .map(Optional::get)
-                        .collect(Collectors.toList());
-        return sortedMonuments;
+    public List<Monument> getMonumentsInRoute(RouteRequest routeRequest) {
+        return routeRequest.getLocations().stream()
+                .map(monumentRepository::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(toList());
     }
 
 
@@ -56,11 +52,10 @@ public class MonumentService {
     }
 
     Information getMonumentInformationByIdAndLanguage(String id, String language) {
-        Monument monument = monumentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Monument with id: " + id + " does not exist"));
-        return monument.getInformation().stream()
+        return getMonumentById(id).getInformation().stream()
                 .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))
-                .findFirst().orElseThrow(() -> new RuntimeException("Requested language is not supported"));
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Requested language is not supported"));
     }
 
     Conversation getMonumentQuestionByIdAndLanguageAndQuestion(String id, String language, String question) {
@@ -78,26 +73,17 @@ public class MonumentService {
         List<Monument> monuments = monumentRepository.findAllByArea(area).stream()
                 .peek(monument -> monument.setInformation(monument.getInformation().stream()
                         .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))
-                        .collect(Collectors.toList())))
-                .collect(Collectors.toList());
+                        .collect(toList())))
+                .collect(toList());
         Collections.shuffle(monuments);
-        return monuments.size() >= 10 ? IntStream.range(0, 10).mapToObj(monuments::get).collect(Collectors.toList()) : monuments;
+        return monuments.size() >= 10 ? IntStream.range(0, 10).mapToObj(monuments::get).collect(toList()) : monuments;
     }
 
     List<String> getAllAreas() {
-        List<Monument> monuments = getAllMonuments();
-        List<String> areas = new ArrayList<>();
-        Set<String> hs = new HashSet<>();
-
-        for (Monument mons : monuments) {
-            areas.add(mons.getArea());
-        }
-
-        hs.addAll(areas);
-        areas.clear();
-        areas.addAll(hs);
-
-        return areas;
+        return getAllMonuments().stream()
+                .map(Monument::getArea)
+                .distinct()
+                .collect(toList());
     }
 
     Monument addMonument(Monument monument) {
@@ -111,7 +97,7 @@ public class MonumentService {
     void addInformationToMonument(String monId, Information info) {
         Monument foundMonument = getMonumentById(monId);
 
-        if (monId != "" && info != null) {
+        if (!Objects.equals(monId, "") && info != null) {
             foundMonument.addInformationObject(info);
             monumentRepository.save(foundMonument);
         }
@@ -128,11 +114,11 @@ public class MonumentService {
         monumentRepository.deleteById(id);
     }
 
-    void saveImage(InputStream stream, String id) {
-        gridFsTemplate.store(stream, id, MediaType.IMAGE_JPEG_VALUE);
+    void saveImage(InputStream stream, String fileName) {
+        gridFsTemplate.store(stream, fileName, MediaType.IMAGE_JPEG_VALUE);
     }
 
-    Image getImageForMonumentId(String id) {
-        throw new NotImplementedException();
+    GridFsResource getImageForMonumentId(String id) {
+        return gridFsTemplate.getResource(id);
     }
 }

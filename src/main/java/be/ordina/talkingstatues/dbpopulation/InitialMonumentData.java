@@ -5,7 +5,9 @@ import be.ordina.talkingstatues.monuments.Language;
 import be.ordina.talkingstatues.monuments.Monument;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class InitialMonumentData {
 
@@ -82,28 +84,30 @@ public class InitialMonumentData {
 
     public static final Monument[] DATA = new Monument[]{
             /* Sint-Andries */
-            new Monument(Collections.singletonList(new Information(Language.NL, "de NEUS", neusDescription, new ArrayList<>())), 4.3983936310,51.2149218763,"Sint-Andries", "statue1.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL,"Peter De Grote", pdgDescription,new ArrayList<>())),4.3938016891,51.2141422857,"Sint-Andries", "statue2.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Willem Elsschot (zuil)", wezDescirption,new ArrayList<>())),4.3967404660,51.2149581960,"Sint-Andries", "statue3.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Netje", netjeDescription, new ArrayList<>())),4.3976318836,51.2162995688, "Sint-Andries", "statue4.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Theodoor Van Rijswijck", tvrDescription, new ArrayList<>())), 4.3997669220,51.2167498301,"Sint-Andries", "statue5.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Vrouwenfiguren", vrouwfigDescription, new ArrayList<>())), 4.3987561460,51.2171887212,"Sint-Andries", "statue6.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Mode Museum", mmDescription, new ArrayList<>())),4.399560,51.217575, "Sint-Andries", "statue7.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Andrieskerk", sakDescription, new ArrayList<>())), 4.398070,51.216519,"Sint-Andries", "statue8.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "coStA", costaDescription, new ArrayList<>())),4.395855,51.214930, "Sint-Andries", "statue9.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Aarde", aardeDescription, new ArrayList<>())), 4.3723547459,51.1886235713,"Sint-Andries", "statue10.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "de NEUS", neusDescription, new ArrayList<>())), 4.3983936310, 51.2149218763, "Sint-Andries", "statue1.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Peter De Grote", pdgDescription, new ArrayList<>())), 4.3938016891, 51.2141422857, "Sint-Andries", "statue2.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Willem Elsschot (zuil)", wezDescirption, new ArrayList<>())), 4.3967404660, 51.2149581960, "Sint-Andries", "statue3.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Netje", netjeDescription, new ArrayList<>())), 4.3976318836, 51.2162995688, "Sint-Andries", "statue4.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Theodoor Van Rijswijck", tvrDescription, new ArrayList<>())), 4.3997669220, 51.2167498301, "Sint-Andries", "statue5.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Vrouwenfiguren", vrouwfigDescription, new ArrayList<>())), 4.3987561460, 51.2171887212, "Sint-Andries", "statue6.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Mode Museum", mmDescription, new ArrayList<>())), 4.399560, 51.217575, "Sint-Andries", "statue7.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Andrieskerk", sakDescription, new ArrayList<>())), 4.398070, 51.216519, "Sint-Andries", "statue8.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "coStA", costaDescription, new ArrayList<>())), 4.395855, 51.214930, "Sint-Andries", "statue9.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Aarde", aardeDescription, new ArrayList<>())), 4.3723547459, 51.1886235713, "Sint-Andries", "statue10.jpg"),
             /* Historisch Centrum */
-            new Monument(Collections.singletonList(new Information(Language.NL, "Pieter Appelmans", appelmansDescription, new ArrayList<>())), 4.4005018473,51.2201132099,"HistorischCentrum", "statue-c01.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Brabofontein", braboDescription, new ArrayList<>())), 4.3997347355,51.2211648456,"HistorischCentrum", "statue-c02.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Buildrager / Arbeid Vrijheid", buildragerDescription, new ArrayList<>())), 4.3989086151,51.2208994190,"HistorischCentrum", "statue-c03.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Putkevie", putkevieDescription, new ArrayList<>())), 4.4002443552,51.2205533543,"HistorischCentrum", "statue-c04.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Peter Paul Rubens", pprDescription, new ArrayList<>())), 4.4016015530,51.2192413083,"HistorischCentrum", "statue-c05.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Teun de Eierboer", eierboerDescription, new ArrayList<>())), 4.4041442871,51.2200829708,"HistorischCentrum", "statue-c06.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Hendrik Conscience", conscienceDescription, new ArrayList<>())), 4.4041872025,51.2208607809,"HistorischCentrum", "statue-c07.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Onze-Lieve-Vrouwekathedraal", olvDescription, new ArrayList<>())), 4.401559,51.220717,"HistorischCentrum", "statue-c08.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Carolus Borromeuskerk", boromDescription, new ArrayList<>())), 4.404649,51.221416,"HistorischCentrum", "statue-c09.jpg"),
-            new Monument(Collections.singletonList(new Information(Language.NL, "De Scheepvaart", scheepvaartDescription, new ArrayList<>())), 4.3975665863,51.2212282367,"HistorischCentrum", "statue-c10.jpg")
+            new Monument(Collections.singletonList(new Information(Language.NL, "Pieter Appelmans", appelmansDescription, new ArrayList<>())), 4.4005018473, 51.2201132099, "HistorischCentrum", "statue-c01.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Brabofontein", braboDescription, new ArrayList<>())), 4.3997347355, 51.2211648456, "HistorischCentrum", "statue-c02.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Buildrager / Arbeid Vrijheid", buildragerDescription, new ArrayList<>())), 4.3989086151, 51.2208994190, "HistorischCentrum", "statue-c03.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Putkevie", putkevieDescription, new ArrayList<>())), 4.4002443552, 51.2205533543, "HistorischCentrum", "statue-c04.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Peter Paul Rubens", pprDescription, new ArrayList<>())), 4.4016015530, 51.2192413083, "HistorischCentrum", "statue-c05.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Teun de Eierboer", eierboerDescription, new ArrayList<>())), 4.4041442871, 51.2200829708, "HistorischCentrum", "statue-c06.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Hendrik Conscience", conscienceDescription, new ArrayList<>())), 4.4041872025, 51.2208607809, "HistorischCentrum", "statue-c07.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Onze-Lieve-Vrouwekathedraal", olvDescription, new ArrayList<>())), 4.401559, 51.220717, "HistorischCentrum", "statue-c08.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "Sint-Carolus Borromeuskerk", boromDescription, new ArrayList<>())), 4.404649, 51.221416, "HistorischCentrum", "statue-c09.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "De Scheepvaart", scheepvaartDescription, new ArrayList<>())), 4.3975665863, 51.2212282367, "HistorischCentrum", "statue-c10.jpg")
             /* Area 3 ? */
     };
+
+    public static final List<Monument> MONUMENTS = Arrays.asList(DATA);
 
 }

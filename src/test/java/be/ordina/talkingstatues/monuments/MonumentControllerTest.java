@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,22 +56,22 @@ public class MonumentControllerTest {
 
     @Test
     public void getImage() {
-        Image image = new Image("content");
-        when(monumentService.getImageForMonumentId(ID)).thenReturn(image);
+        GridFsResource gridFsResource = mock(GridFsResource.class);
+        when(monumentService.getImageForMonumentId(ID)).thenReturn(gridFsResource);
 
         ResponseEntity actual = monumentController.getImage(ID);
-        ResponseEntity<Image> expected = ResponseEntity.ok().header(CONTENT_DISPOSITION).body(image);
+        ResponseEntity<GridFsResource> expected = ResponseEntity.ok().header(CONTENT_DISPOSITION).body(gridFsResource);
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void getImageBase64() {
-        Image image = new Image("content");
-        when(monumentService.getImageForMonumentId(ID)).thenReturn(image);
+        GridFsResource gridFsResource = mock(GridFsResource.class);
+        when(monumentService.getImageForMonumentId(ID)).thenReturn(gridFsResource);
 
         ResponseEntity actual = monumentController.getImageBase64(ID);
-        ResponseEntity<Image> expected = ResponseEntity.ok().header(CONTENT_DISPOSITION).body(image);
+        ResponseEntity<GridFsResource> expected = ResponseEntity.ok().header(CONTENT_DISPOSITION).body(gridFsResource);
 
         assertEquals(expected, actual);
     }
