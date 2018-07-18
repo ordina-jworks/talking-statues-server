@@ -135,11 +135,4 @@ public class MonumentService {
     Image getImageForMonumentId(String id) {
         throw new NotImplementedException();
     }
-
-    /*
-    String chatWithMonument(String monumentId, String userInput) {
-        Monument monument = getMonumentById(monumentId);
-        return chatBotService.chat(userInput);
-    }
-    */
 }

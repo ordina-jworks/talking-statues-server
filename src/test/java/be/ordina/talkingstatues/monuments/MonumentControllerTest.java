@@ -2,7 +2,6 @@ package be.ordina.talkingstatues.monuments;
 
 import be.ordina.talkingstatues.appusers.AppUser;
 import be.ordina.talkingstatues.appusers.AuthService;
-import org.apache.http.auth.BasicUserPrincipal;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -124,15 +123,6 @@ public class MonumentControllerTest {
     }
 
     @Test
-    public void chatWithMonument() {
-        when(monumentService.chatWithMonument(ID, QUESTION)).thenReturn(ANSWER);
-
-        String actual = monumentController.chatWithMonument(ID, QUESTION);
-
-        assertEquals(ANSWER, actual);
-    }
-
-    @Test
     public void getMonuments() {
         List<Monument> expected = Arrays.asList(new Monument(), new Monument());
         when(monumentService.getAllMonuments()).thenReturn(expected);
@@ -202,7 +192,7 @@ public class MonumentControllerTest {
         appUser.setId(ID);
         when(authService.getUserByHandle(PRINCIPAL)).thenReturn(appUser);
 
-        monumentController.addVisit(MON_ID, new BasicUserPrincipal(PRINCIPAL));
+        monumentController.addVisit(MON_ID, () -> PRINCIPAL);
 
         assertEquals(1, appUser.getVisits().size());
         assertEquals(ID, appUser.getVisits().get(0).getUserId());
