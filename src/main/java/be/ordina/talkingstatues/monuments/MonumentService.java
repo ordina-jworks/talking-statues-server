@@ -84,9 +84,20 @@ public class MonumentService {
         return monuments.size() >= 10 ? IntStream.range(0, 10).mapToObj(monuments::get).collect(Collectors.toList()) : monuments;
     }
 
+    List<String> getAllAreas() {
+        List<Monument> monuments = getAllMonuments();
+        List<String> areas = new ArrayList<>();
+        Set<String> hs = new HashSet<>();
 
-    List<Monument> findAll() {
-        return monumentRepository.findAll();
+        for (Monument mons : monuments) {
+            areas.add(mons.getArea());
+        }
+
+        hs.addAll(areas);
+        areas.clear();
+        areas.addAll(hs);
+
+        return areas;
     }
 
     Monument addMonument(Monument monument) {
@@ -106,7 +117,7 @@ public class MonumentService {
         }
     }
 
-    void putMonument(String id, Monument monument) {
+    void editMonument(String id, Monument monument) {
         monumentRepository.findById(id).ifPresent(mon -> {
             monument.setId(id);
             monumentRepository.save(monument);
