@@ -52,14 +52,14 @@ public class MonumentController {
     @GetMapping(value = "/{id}/information", produces = {"application/vnd.ordina.v1.0+json"})
     Information getMonumentInformation(@PathVariable String id, @RequestParam("lang") String language) {
         Information information = monumentService.getMonumentInformationByIdAndLanguage(id, language);
-        information.setQuestions(null);
+        information.setConversations(null);
         return information;
     }
 
     @GetMapping(value = "/{id}/questions", produces = {"application/vnd.ordina.v1.0+json"})
-    Question getMonumentQuestions(@PathVariable String id,
-                                  @RequestParam("lang") String language,
-                                  @RequestParam("question") String question) {
+    Conversation getMonumentQuestions(@PathVariable String id,
+                                      @RequestParam("lang") String language,
+                                      @RequestParam("question") String question) {
         return monumentService.getMonumentQuestionByIdAndLanguageAndQuestion(id, language, question);
     }
 

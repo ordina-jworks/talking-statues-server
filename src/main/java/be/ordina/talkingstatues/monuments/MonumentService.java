@@ -63,12 +63,12 @@ public class MonumentService {
                 .findFirst().orElseThrow(() -> new RuntimeException("Requested language is not supported"));
     }
 
-    Question getMonumentQuestionByIdAndLanguageAndQuestion(String id, String language, String question) {
-        List<Question> questions = getMonumentInformationByIdAndLanguage(id, language).getQuestions();
-        Map<Question, Long> questionMap = new HashMap<>();
-        questions.forEach(question1 -> questionMap.put(question1,
+    Conversation getMonumentQuestionByIdAndLanguageAndQuestion(String id, String language, String question) {
+        List<Conversation> conversations = getMonumentInformationByIdAndLanguage(id, language).getConversations();
+        Map<Conversation, Long> questionMap = new HashMap<>();
+        conversations.forEach(conversation1 -> questionMap.put(conversation1,
                 Arrays.stream(question.split(" "))
-                        .filter(keyword -> question1.getQuestion().matches("(?i:.*" + keyword + ".*)"))
+                        .filter(keyword -> conversation1.getQuestion().matches("(?i:.*" + keyword + ".*)"))
                         .count()));
         return Collections.max(questionMap.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
     }

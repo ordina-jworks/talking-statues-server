@@ -84,16 +84,16 @@ public class MonumentControllerTest {
         Information actual = monumentController.getMonumentInformation(ID, NL);
 
         assertEquals(expected, actual);
-        assertNull(expected.getQuestions());
+        assertNull(expected.getConversations());
     }
 
     @Test
     public void getMonumentQuestions() {
-        Question expected = new Question(QUESTION, ANSWER);
+        Conversation expected = new Conversation(QUESTION, ANSWER);
         when(monumentService.getMonumentQuestionByIdAndLanguageAndQuestion(ID, NL, QUESTION))
                 .thenReturn(expected);
 
-        Question actual = monumentController.getMonumentQuestions(ID, NL, QUESTION);
+        Conversation actual = monumentController.getMonumentQuestions(ID, NL, QUESTION);
 
         assertEquals(expected, actual);
     }
