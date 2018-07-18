@@ -1,8 +1,5 @@
 package be.ordina.talkingstatues.chatbot;
 
-import org.alicebot.ab.Bot;
-import org.alicebot.ab.Chat;
-import org.alicebot.ab.MagicBooleans;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -13,6 +10,7 @@ public class ChatBotService {
     private static final boolean TRACE_MODE = false;
     private static final String BOT_NAME = "super";
 
+    /*
     public String chat(String userInput) {
         final String processedInput = processUserInput(userInput);
         final Chat chatSession = setupBot();
@@ -23,6 +21,7 @@ public class ChatBotService {
 
         return getResponseFromBot(processedInput, chatSession);
     }
+    */
 
     private String processUserInput(String userInput) {
         if (userInput == null || userInput.length() < 1) {
@@ -31,6 +30,7 @@ public class ChatBotService {
         return userInput.contains("\"") ? userInput.substring(userInput.indexOf('"') + 1, userInput.lastIndexOf('"')) : userInput;
     }
 
+    /*
     private String getResponseFromBot(String userInput, Chat chatSession) {
         String response = chatSession.multisentenceRespond(userInput);
         while (response.contains("&lt;")) {
@@ -41,7 +41,9 @@ public class ChatBotService {
         }
         return response;
     }
+    */
 
+    /*
     private Chat setupBot() {
         MagicBooleans.trace_mode = TRACE_MODE;
         Bot bot = new Bot(BOT_NAME, getResourcesPath());
@@ -49,11 +51,14 @@ public class ChatBotService {
         bot.brain.nodeStats();
         return chatSession;
     }
+    */
 
+    /*
     private String getResourcesPath() {
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
         path = path.substring(0, path.length() - 2);
         return path + File.separator + "src" + File.separator + "main" + File.separator + "resources";
     }
+    */
 }
