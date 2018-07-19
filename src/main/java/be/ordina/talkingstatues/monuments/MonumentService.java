@@ -1,5 +1,8 @@
 package be.ordina.talkingstatues.monuments;
 
+import be.ordina.talkingstatues.monuments.Conversation.Answer;
+import be.ordina.talkingstatues.monuments.Conversation.Conversation;
+import be.ordina.talkingstatues.monuments.Conversation.Question;
 import be.ordina.talkingstatues.routes.RouteRequest;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
@@ -39,51 +42,49 @@ public class MonumentService {
 
     public List<Monument> getMonumentsInRoute(RouteRequest routeRequest) {
         return routeRequest.getLocations().stream()
-                .map(monumentRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(toList());
+                       .map(monumentRepository::findById)
+                       .filter(Optional::isPresent)
+                       .map(Optional::get)
+                       .collect(toList());
     }
 
 
     Monument getMonumentById(String id) {
         return monumentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Monument with id: " + id + " does not exist"));
+                       .orElseThrow(() -> new RuntimeException("Monument with id: " + id + " does not exist"));
     }
 
     Information getMonumentInformationByIdAndLanguage(String id, String language) {
         return getMonumentById(id).getInformation().stream()
-                .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Requested language is not supported"));
+                       .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))
+                       .findFirst()
+                       .orElseThrow(() -> new RuntimeException("Requested language is not supported"));
     }
 
-    Conversation getMonumentQuestionByIdAndLanguageAndQuestion(String id, String language, String question) {
-        List<Conversation> conversations = getMonumentInformationByIdAndLanguage(id, language).getConversations();
-        Map<Conversation, Long> questionMap = new HashMap<>();
-        conversations.forEach(conversation1 -> questionMap.put(conversation1,
-                Arrays.stream(question.split(" "))
-                        .filter(keyword -> conversation1.getQuestion().matches("(?i:.*" + keyword + ".*)"))
-                        .count()));
-        return Collections.max(questionMap.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
+    Answer findAnswer(String id, String language, String inputQuestion) {
+        final List<Conversation> conversations = getMonumentInformationByIdAndLanguage(id, language).getConversations();
+        final Map<Answer, Long> questionMap = new HashMap<>();
+        conversations.forEach(conversation -> questionMap.put(conversation.getAnswer(), countMatches(inputQuestion, conversation.getQuestion())));
+
+        return findBestMatch(questionMap);
     }
 
 
     List<Monument> getRandomSelection(String area, String language) {
-        List<Monument> monuments = monumentRepository.findAllByArea(area).stream()
-                .peek(monument -> monument.setInformation(monument.getInformation().stream()
-                        .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))
-                        .collect(toList())))
-                .collect(toList());
+        final List<Monument> monuments = monumentRepository.findAllByArea(area).stream()
+                                                 .peek(monument -> monument.setInformation(monument.getInformation().stream()
+                                                                                                   .filter(information -> information.getLanguage().toString().equalsIgnoreCase(language))
+                                                                                                   .collect(toList())))
+                                                 .collect(toList());
         Collections.shuffle(monuments);
         return monuments.size() >= 10 ? IntStream.range(0, 10).mapToObj(monuments::get).collect(toList()) : monuments;
     }
 
     List<String> getAllAreas() {
         return getAllMonuments().stream()
-                .map(Monument::getArea)
-                .distinct()
-                .collect(toList());
+                       .map(Monument::getArea)
+                       .distinct()
+                       .collect(toList());
     }
 
     Monument addMonument(Monument monument) {
@@ -95,7 +96,7 @@ public class MonumentService {
     }
 
     void addInformationToMonument(String monId, Information info) {
-        Monument foundMonument = getMonumentById(monId);
+        final Monument foundMonument = getMonumentById(monId);
 
         if (!Objects.equals(monId, "") && info != null) {
             foundMonument.addInformationObject(info);
@@ -120,5 +121,19 @@ public class MonumentService {
 
     GridFsResource getImageForMonumentId(String id) {
         return gridFsTemplate.getResource(id);
+    }
+
+    private Answer findBestMatch(Map<Answer, Long> questionMap) {
+        return Collections.max(questionMap.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
+    }
+
+    private long countMatches(String inputQuestion, Question question) {
+        return Arrays.stream(inputQuestion.split(" "))
+                       .filter(keyword -> hasMatch(question, keyword))
+                       .count();
+    }
+
+    private boolean hasMatch(Question question, String keyword) {
+        return question.matches("(?i:.*" + keyword + ".*)");
     }
 }
