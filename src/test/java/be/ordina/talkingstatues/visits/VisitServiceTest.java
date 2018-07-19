@@ -7,8 +7,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import static be.ordina.talkingstatues.appusers.AppUserTestConstants.APP_USER_ID;
-import static be.ordina.talkingstatues.monuments.MonumentTestConstants.MON_ID;
+import static be.ordina.talkingstatues.appusers.AppUserTestUtils.APP_USER_ID;
+import static be.ordina.talkingstatues.monuments.MonumentTestUtils.MON_ID;
 import static org.mockito.Mockito.verify;
 
 public class VisitServiceTest {

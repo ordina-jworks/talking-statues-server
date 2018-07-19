@@ -1,4 +1,5 @@
 package be.ordina.talkingstatues.monuments;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,9 +10,11 @@ import java.util.List;
 @Document(collection = "monuments")
 public class Monument {
 
-    @Id @JsonView(Aspects.MinimalMonumentAspect.class)
+    @Id
+    @JsonView(Aspects.MinimalMonumentAspect.class)
     private String id;
-    @NotEmpty @JsonView(Aspects.MinimalMonumentAspect.class)
+    @NotEmpty
+    @JsonView(Aspects.MinimalMonumentAspect.class)
     private List<Information> information;
     @NotEmpty
     private Double longitude;
@@ -24,7 +27,6 @@ public class Monument {
     private String picture;
 
     public Monument() {
-
     }
 
     public Monument(@NotEmpty List<Information> information, @NotEmpty Double longitude, @NotEmpty Double latitude, @NotEmpty String area, String picture) {
@@ -83,13 +85,13 @@ public class Monument {
         this.picture = picture;
     }
 
-    public void addInformationObject(Information info){
-        if(info != null){
+    public void addInformationObject(Information info) {
+        if (info != null) {
             this.information.add(info);
         }
     }
 
-    public String toString(){
+    public String toString() {
         return information.toString() + " in " + this.area + " lat: " + this.latitude + " long: " + this.longitude;
     }
 }

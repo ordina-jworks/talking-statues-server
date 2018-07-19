@@ -12,7 +12,7 @@ import org.mockito.junit.MockitoRule;
 import java.util.List;
 import java.util.Optional;
 
-import static be.ordina.talkingstatues.monuments.MonumentTestConstants.MON_ID;
+import static be.ordina.talkingstatues.monuments.MonumentTestUtils.MON_ID;
 import static be.ordina.talkingstatues.routes.RouteTestConstants.ROUTE_ID;
 import static be.ordina.talkingstatues.routes.RouteTestConstants.ROUTE_NAME;
 import static java.util.Collections.emptyList;

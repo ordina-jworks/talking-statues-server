@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static be.ordina.talkingstatues.appusers.AppUserTestConstants.*;
+import static be.ordina.talkingstatues.appusers.AppUserTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

@@ -23,7 +23,6 @@ public class Information {
     }
 
     public Information(@NotEmpty Language language, @NotEmpty String name, @NotEmpty String description, List<Conversation> conversations) {
-
         this.language = language;
         this.name = name;
         this.description = description;

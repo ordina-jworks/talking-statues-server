@@ -18,9 +18,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static be.ordina.talkingstatues.appusers.AppUserTestConstants.APP_USER_ID;
-import static be.ordina.talkingstatues.appusers.AppUserTestConstants.PRINCIPAL;
-import static be.ordina.talkingstatues.monuments.MonumentTestConstants.*;
+import static be.ordina.talkingstatues.appusers.AppUserTestUtils.APP_USER_ID;
+import static be.ordina.talkingstatues.appusers.AppUserTestUtils.PRINCIPAL;
+import static be.ordina.talkingstatues.monuments.MonumentTestUtils.*;
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;

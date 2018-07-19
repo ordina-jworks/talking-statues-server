@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static be.ordina.talkingstatues.appusers.AppUserTestConstants.*;
+import static be.ordina.talkingstatues.appusers.AppUserTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;

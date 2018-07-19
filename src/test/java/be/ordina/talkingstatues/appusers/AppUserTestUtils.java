@@ -1,8 +1,8 @@
 package be.ordina.talkingstatues.appusers;
 
-public class AppUserTestConstants {
+public class AppUserTestUtils {
 
-    private AppUserTestConstants() {
+    private AppUserTestUtils() {
     }
 
     public static final String HANDLE = "handle";

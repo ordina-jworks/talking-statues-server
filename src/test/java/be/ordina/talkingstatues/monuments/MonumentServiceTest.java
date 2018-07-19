@@ -19,7 +19,7 @@ import java.util.Optional;
 import static be.ordina.talkingstatues.dbpopulation.InitialMonumentData.MONUMENTS;
 import static be.ordina.talkingstatues.monuments.Language.*;
 import static be.ordina.talkingstatues.monuments.Language.NL;
-import static be.ordina.talkingstatues.monuments.MonumentTestConstants.*;
+import static be.ordina.talkingstatues.monuments.MonumentTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.*;
@@ -230,13 +230,6 @@ public class MonumentServiceTest {
     }
 
 
-    private List<Monument> getMonumentsInDifferentAreas() {
-        Monument monument1 = new Monument(getInfo(NL), 5.00, 5.00, "hier", "pic");
-        Monument monument2 = new Monument(getInfo(NL), 5.00, 5.00, "daar", "pic");
-        Monument monument3 = new Monument(getInfo(NL), 5.00, 5.00, "hier", "pic");
-        return Arrays.asList(monument1, monument2, monument3);
-    }
-
     private void assertEnglishIsFilteredOut(Monument specialOne) {
         assertNotEquals(specialOne.getInformation().get(0).getLanguage(), EN);
         assertEquals(specialOne.getInformation().get(0).getLanguage(), NL);
@@ -246,18 +239,6 @@ public class MonumentServiceTest {
         Information info1 = new Information(NL, "name", "desc", singletonList(new Conversation(QUESTION, ANSWER)));
         Information info2 = new Information(EN, "name", "desc", singletonList(new Conversation(QUESTION, ANSWER)));
         return new Monument(Arrays.asList(info1, info2), 5.00, 5.00, AREA, "specialOne");
-    }
-
-    private List<Monument> buildRandomMonuments(String area, Language language, int number) {
-        ArrayList<Monument> monuments = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            monuments.add(new Monument(getInfo(language), 5.00, 5.00, area, "picture"));
-        }
-        return monuments;
-    }
-
-    private List<Information> getInfo(Language language) {
-        return singletonList(new Information(language, "name", "description", singletonList(new Conversation(QUESTION, ANSWER))));
     }
 
     private RouteRequest buildRouteRequest() {
