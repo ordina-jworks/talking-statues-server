@@ -18,7 +18,8 @@ import static org.mockito.Mockito.when;
 
 public class RouteControllerTest {
 
-    public static final String ROUTE_ID = "routeId";
+    private static final String ROUTE_ID = "routeId";
+
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
