@@ -90,7 +90,7 @@ public class MonumentControllerTest {
         when(monumentService.findAnswer(MON_ID, NL, QUESTION_VALUE))
                 .thenReturn(expected.getAnswer());
 
-        Answer actual = monumentController.getMonumentQuestions(MON_ID, NL, QUESTION_VALUE);
+        Answer actual = monumentController.getMonumentAnswer(MON_ID, NL, QUESTION_VALUE);
 
         assertEquals(expected.getAnswer(), actual);
     }

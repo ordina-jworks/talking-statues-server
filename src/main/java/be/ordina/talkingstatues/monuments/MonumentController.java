@@ -58,9 +58,9 @@ public class MonumentController {
     }
 
     @GetMapping(value = "/{id}/questions", produces = {"application/vnd.ordina.v1.0+json"})
-    Answer getMonumentQuestions(@PathVariable String id,
-                                @RequestParam("lang") String language,
-                                @RequestParam("question") String question) {
+    Answer getMonumentAnswer(@PathVariable String id,
+                             @RequestParam("lang") String language,
+                             @RequestParam("question") String question) {
         return monumentService.findAnswer(id, language, question);
     }
 

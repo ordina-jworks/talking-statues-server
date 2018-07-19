@@ -63,10 +63,10 @@ public class MonumentService {
 
     Answer findAnswer(String id, String language, String inputQuestion) {
         final List<Conversation> conversations = getMonumentInformationByIdAndLanguage(id, language).getConversations();
-        final Map<Answer, Long> questionMap = new HashMap<>();
-        conversations.forEach(conversation -> questionMap.put(conversation.getAnswer(), countMatches(inputQuestion, conversation.getQuestion())));
+        final Map<Answer, Long> answerMap = new HashMap<>();
+        conversations.forEach(conversation -> answerMap.put(conversation.getAnswer(), countMatches(inputQuestion, conversation.getQuestion())));
 
-        return findBestMatch(questionMap);
+        return findBestMatch(answerMap);
     }
 
 

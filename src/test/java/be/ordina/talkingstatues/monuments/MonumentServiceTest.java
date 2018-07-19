@@ -1,6 +1,8 @@
 package be.ordina.talkingstatues.monuments;
 
+import be.ordina.talkingstatues.monuments.Conversation.Answer;
 import be.ordina.talkingstatues.monuments.Conversation.Conversation;
+import be.ordina.talkingstatues.monuments.Conversation.Question;
 import be.ordina.talkingstatues.routes.RouteRequest;
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,8 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static be.ordina.talkingstatues.dbpopulation.InitialMonumentData.MONUMENTS;
-import static be.ordina.talkingstatues.monuments.Language.*;
-import static be.ordina.talkingstatues.monuments.Language.NL;
+import static be.ordina.talkingstatues.monuments.Language.DE;
+import static be.ordina.talkingstatues.monuments.Language.EN;
 import static be.ordina.talkingstatues.monuments.MonumentTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -90,10 +92,10 @@ public class MonumentServiceTest {
     @Test
     public void getMonumentInformationByIdAndLanguage() {
         Monument expected = new Monument();
-        expected.setInformation(singletonList(new Information(NL, "name", "description", singletonList(new Conversation(QUESTION, ANSWER)))));
+        expected.setInformation(singletonList(new Information(Language.NL, "name", "description", singletonList(new Conversation(QUESTION, ANSWER)))));
         when(monumentRepository.findById(MON_ID)).thenReturn(Optional.of(expected));
 
-        Information actual = monumentService.getMonumentInformationByIdAndLanguage(MON_ID, NL.name());
+        Information actual = monumentService.getMonumentInformationByIdAndLanguage(MON_ID, Language.NL.name());
 
         assertEquals(expected.getInformation().get(0), actual);
     }
@@ -101,7 +103,7 @@ public class MonumentServiceTest {
     @Test
     public void getMonumentInformationByIdAndLanguage_languageNotSupported() {
         Monument expected = new Monument();
-        expected.setInformation(singletonList(new Information(NL, "name", "description", singletonList(new Conversation(QUESTION, ANSWER)))));
+        expected.setInformation(singletonList(new Information(Language.NL, "name", "description", singletonList(new Conversation(QUESTION, ANSWER)))));
         when(monumentRepository.findById(MON_ID)).thenReturn(Optional.of(expected));
 
         assertThatExceptionOfType(RuntimeException.class)
@@ -111,12 +113,23 @@ public class MonumentServiceTest {
 
     @Test
     public void getMonumentQuestionByIdAndLanguageAndQuestion() {
-        // TODO david
+        List<Conversation> conversations = new ArrayList<>();
+        conversations.add(new Conversation(QUESTION, ANSWER));
+        conversations.add(new Conversation(new Question("How's the weather?"), new Answer("Sunny!")));
+        List<Information> infoList = new ArrayList<>();
+        infoList.add(new Information(Language.NL, "name", "desc", conversations));
+        Monument monument = new Monument(infoList, 5.00, 5.00, AREA, "picture");
+        monument.setId(MON_ID);
+        when(monumentRepository.findById(MON_ID)).thenReturn(Optional.of(monument));
+
+        Answer actual = monumentService.findAnswer(MON_ID, MonumentTestUtils.NL, "What is the weather like today?");
+
+        assertEquals("Sunny!", actual.getAnswer());
     }
 
     @Test
     public void getRandomSelection_smallerThanTEN() {
-        List<Monument> monuments = buildRandomMonuments(AREA, NL, 3);
+        List<Monument> monuments = buildRandomMonuments(AREA, Language.NL, 3);
         when(monumentRepository.findAllByArea(AREA)).thenReturn(monuments);
 
         List<Monument> actual = monumentService.getRandomSelection(AREA, "NL");
@@ -126,7 +139,7 @@ public class MonumentServiceTest {
 
     @Test
     public void getRandomSelection_wrongLanguagesGetFilteredOut() {
-        List<Monument> monuments = buildRandomMonuments(AREA, NL, 3);
+        List<Monument> monuments = buildRandomMonuments(AREA, Language.NL, 3);
         monuments.add(getMonumentWithMultipleLanguages());
         when(monumentRepository.findAllByArea(AREA)).thenReturn(monuments);
 
@@ -142,7 +155,7 @@ public class MonumentServiceTest {
 
     @Test
     public void getRandomSelection_biggerThanTEN() {
-        List<Monument> monuments = buildRandomMonuments(AREA, NL, 15);
+        List<Monument> monuments = buildRandomMonuments(AREA, Language.NL, 15);
         when(monumentRepository.findAllByArea(AREA)).thenReturn(monuments);
 
         List<Monument> actual = monumentService.getRandomSelection(AREA, "NL");
@@ -232,11 +245,11 @@ public class MonumentServiceTest {
 
     private void assertEnglishIsFilteredOut(Monument specialOne) {
         assertNotEquals(specialOne.getInformation().get(0).getLanguage(), EN);
-        assertEquals(specialOne.getInformation().get(0).getLanguage(), NL);
+        assertEquals(specialOne.getInformation().get(0).getLanguage(), Language.NL);
     }
 
     private Monument getMonumentWithMultipleLanguages() {
-        Information info1 = new Information(NL, "name", "desc", singletonList(new Conversation(QUESTION, ANSWER)));
+        Information info1 = new Information(Language.NL, "name", "desc", singletonList(new Conversation(QUESTION, ANSWER)));
         Information info2 = new Information(EN, "name", "desc", singletonList(new Conversation(QUESTION, ANSWER)));
         return new Monument(Arrays.asList(info1, info2), 5.00, 5.00, AREA, "specialOne");
     }
