@@ -2,7 +2,6 @@ package be.ordina.talkingstatues.routes;
 
 import be.ordina.talkingstatues.monuments.Monument;
 import be.ordina.talkingstatues.monuments.MonumentService;
-import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -10,25 +9,21 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static be.ordina.talkingstatues.monuments.MonumentTestConstants.MON_ID;
+import static be.ordina.talkingstatues.routes.RouteTestConstants.ROUTE_ID;
+import static be.ordina.talkingstatues.routes.RouteTestConstants.ROUTE_NAME;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyChar;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.refEq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class RouteServiceTest {
-
-    private static final String ROUTE_ID = "routeId";
-    private static final String ROUTE_NAME = "aRoute";
-    private static final String MON_ID = "monID";
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();

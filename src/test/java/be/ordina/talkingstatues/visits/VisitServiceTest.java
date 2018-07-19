@@ -7,12 +7,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import static be.ordina.talkingstatues.appusers.AppUserTestConstants.APP_USER_ID;
+import static be.ordina.talkingstatues.monuments.MonumentTestConstants.MON_ID;
 import static org.mockito.Mockito.verify;
 
 public class VisitServiceTest {
-
-    private static final String USER_ID = "userID";
-    private static final String MON_ID = "monId";
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -24,7 +23,7 @@ public class VisitServiceTest {
 
     @Test
     public void addVisitToDb() {
-        Visit visit = new Visit(USER_ID, MON_ID);
+        Visit visit = new Visit(APP_USER_ID, MON_ID);
 
         visitService.addVisitToDb(visit);
         verify(visitRepository).save(visit);

@@ -11,14 +11,13 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
+import static be.ordina.talkingstatues.routes.RouteTestConstants.ROUTE_ID;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class RouteControllerTest {
-
-    private static final String ROUTE_ID = "routeId";
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();

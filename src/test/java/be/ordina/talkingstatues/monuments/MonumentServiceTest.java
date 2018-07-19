@@ -17,6 +17,8 @@ import java.util.Optional;
 
 import static be.ordina.talkingstatues.dbpopulation.InitialMonumentData.MONUMENTS;
 import static be.ordina.talkingstatues.monuments.Language.*;
+import static be.ordina.talkingstatues.monuments.MonumentTestConstants.AREA;
+import static be.ordina.talkingstatues.monuments.MonumentTestConstants.MON_ID;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.*;
@@ -24,8 +26,6 @@ import static org.mockito.Mockito.*;
 
 public class MonumentServiceTest {
 
-    public static final String MON_ID = "monId";
-    private static final String AREA = "area";
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
@@ -132,9 +132,9 @@ public class MonumentServiceTest {
         List<Monument> actual = monumentService.getRandomSelection(AREA, "NL");
 
         Monument specialOne = actual.stream()
-                .filter(monument -> monument.getPicture().equals("specialOne"))
-                .findFirst()
-                .get();
+                                      .filter(monument -> monument.getPicture().equals("specialOne"))
+                                      .findFirst()
+                                      .get();
 
         assertEnglishIsFilteredOut(specialOne);
     }

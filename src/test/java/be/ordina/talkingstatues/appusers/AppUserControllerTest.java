@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static be.ordina.talkingstatues.appusers.AppUserTestConstants.*;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -23,13 +24,6 @@ import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.*;
 
 public class AppUserControllerTest {
-
-    private static final String HANDLE = "handle";
-    private static final String NAME = "aName";
-    private static final String LAST_NAME = "aLastName";
-    private static final AppUser APP_USER = new AppUser(HANDLE, NAME, LAST_NAME);
-    private static final String ID = "anId";
-    private static final String PRINCIPAL = "principal";
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -52,9 +46,9 @@ public class AppUserControllerTest {
 
     @Test
     public void findUserById() {
-        when(authService.getUserById(ID)).thenReturn(APP_USER);
+        when(authService.getUserById(APP_USER_ID)).thenReturn(APP_USER);
 
-        AppUser actual = appUserController.findUserById(ID);
+        AppUser actual = appUserController.findUserById(APP_USER_ID);
 
         assertEquals(APP_USER, actual);
     }
@@ -97,16 +91,16 @@ public class AppUserControllerTest {
 
     @Test
     public void deleteFoundUser() {
-        appUserController.deleteFoundUser(ID);
+        appUserController.deleteFoundUser(APP_USER_ID);
 
-        verify(authService).deleteUserFromDb(ID);
+        verify(authService).deleteUserFromDb(APP_USER_ID);
     }
 
     @Test
     public void forgetFoundUser() {
-        when(authService.getUserById(ID)).thenReturn(APP_USER);
+        when(authService.getUserById(APP_USER_ID)).thenReturn(APP_USER);
 
-        appUserController.forgetFoundUser(ID);
+        appUserController.forgetFoundUser(APP_USER_ID);
 
         verify(authService).registerUser(refEq(new AppUser("", "", "")));
     }

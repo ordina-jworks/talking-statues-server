@@ -11,19 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static be.ordina.talkingstatues.appusers.AppUserTestConstants.*;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class AuthServiceTest {
-
-    private static final String HANDLE = "handle";
-    private static final String NAME = "aName";
-    private static final String LAST_NAME = "aLastName";
-    private static final AppUser APP_USER = new AppUser(HANDLE, NAME, LAST_NAME);
-    private static final AppUser ANOTHER_APP_USER = new AppUser(HANDLE, NAME, LAST_NAME);
-    private static final String ID = "anId";
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -82,25 +76,25 @@ public class AuthServiceTest {
 
     @Test
     public void deleteUserFromDb() {
-        authService.deleteUserFromDb(ID);
-        verify(appUserRepository).deleteById(ID);
+        authService.deleteUserFromDb(APP_USER_ID);
+        verify(appUserRepository).deleteById(APP_USER_ID);
     }
 
     @Test
     public void getUserById() {
-        when(appUserRepository.findById(ID)).thenReturn(Optional.of(APP_USER));
+        when(appUserRepository.findById(APP_USER_ID)).thenReturn(Optional.of(APP_USER));
 
-        AppUser actual = authService.getUserById(ID);
+        AppUser actual = authService.getUserById(APP_USER_ID);
 
         assertEquals(APP_USER, actual);
     }
 
     @Test
     public void getUserById_userNotFound() {
-        when(appUserRepository.findById(ID)).thenReturn(Optional.empty());
+        when(appUserRepository.findById(APP_USER_ID)).thenReturn(Optional.empty());
 
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> authService.getUserById(ID))
+                .isThrownBy(() -> authService.getUserById(APP_USER_ID))
                 .withMessage("user not present");
     }
 }
