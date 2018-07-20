@@ -31,7 +31,7 @@ public class MonumentService {
         for (Monument m : initialData) {
             monumentRepository.save(m);
             InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("images/" + m.getPicture());
-            saveImage(inputStream, m.getPicture());
+            saveImage(inputStream, m.getId());
             //     System.out.println(m.toString() + " has been saved.\n");
         }
     }
@@ -115,8 +115,8 @@ public class MonumentService {
         monumentRepository.deleteById(id);
     }
 
-    void saveImage(InputStream stream, String fileName) {
-        gridFsTemplate.store(stream, fileName, MediaType.IMAGE_JPEG_VALUE);
+    void saveImage(InputStream stream, String monumentID) {
+        gridFsTemplate.store(stream, monumentID, MediaType.IMAGE_JPEG_VALUE);
     }
 
     GridFsResource getImageForMonumentId(String id) {
