@@ -1,5 +1,6 @@
 package be.ordina.talkingstatues.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,6 +19,9 @@ import java.util.Collections;
 @Configuration
 public class OauthSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private OauthSecuritySuccessHandler oauthSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -34,6 +38,7 @@ public class OauthSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .oauth2Login()
+                .successHandler(oauthSuccessHandler)
                 .and().logout()
                 .logoutUrl("/logout")
                 .invalidateHttpSession(true)

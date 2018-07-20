@@ -9,6 +9,7 @@ public class ApplicationConfigurationUtils {
 
     public static final String INITIAL_DATA_MONUMENTS_KEY = "be.ordina.talkingstatues.initialdata.monuments";
     public static final String INITIAL_DATA_VISITS_KEY = "be.ordina.talkingstatues.initialdata.visits";
+    public static final String MOBILE_APP_URL_KEY = "be.ordina.talkingstatues.mobile.url";
 
     @Autowired
     private Environment env;
