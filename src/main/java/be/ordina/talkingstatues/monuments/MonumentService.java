@@ -14,6 +14,8 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
+import static org.springframework.data.mongodb.core.query.Query.query;
+import static org.springframework.data.mongodb.gridfs.GridFsCriteria.whereFilename;
 
 @Service
 public class MonumentService {
@@ -28,6 +30,8 @@ public class MonumentService {
 
     public void initializeData(List<Monument> initialData) {
         monumentRepository.deleteAll();
+        Arrays.stream(gridFsTemplate.getResources("*"))
+                .forEach(resource -> gridFsTemplate.delete(query(whereFilename().is(resource.getFilename()))));
         for (Monument m : initialData) {
             monumentRepository.save(m);
             InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("images/" + m.getPicture());

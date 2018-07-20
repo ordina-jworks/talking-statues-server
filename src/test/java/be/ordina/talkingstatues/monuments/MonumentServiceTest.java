@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import static org.springframework.data.mongodb.core.query.Query.query;
+import static org.springframework.data.mongodb.gridfs.GridFsCriteria.whereFilename;
 
 public class MonumentServiceTest {
 
@@ -42,10 +45,14 @@ public class MonumentServiceTest {
 
     @Test
     public void initializeData() {
+        GridFsResource mock = mock(GridFsResource.class);
+        GridFsResource resources[] = {mock};
+        when(gridFsTemplate.getResources("*")).thenReturn(resources);
 
         monumentService.initializeData(MONUMENTS);
 
         verify(monumentRepository).deleteAll();
+        verify(gridFsTemplate).delete(query(whereFilename().is(mock.getFilename())));
         MONUMENTS.forEach(monument -> verify(monumentRepository).save(monument));
     }
 
