@@ -1,7 +1,9 @@
 package be.ordina.talkingstatues.monuments;
 
+import be.ordina.talkingstatues.monuments.Conversation.Conversation;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
@@ -9,22 +11,22 @@ import java.util.List;
 public class Information {
     @NotEmpty
     private Language language;
-    @NotEmpty @JsonView(Aspects.MinimalMonumentAspect.class)
+    @NotEmpty
+    @JsonView(Aspects.MinimalMonumentAspect.class)
     private String name;
     @NotEmpty
     private String description;
 
-    private List<Question> questions;
+    private List<Conversation> conversations;
 
     public Information() {
     }
 
-    public Information(@NotEmpty Language language, @NotEmpty String name, @NotEmpty String description, List<Question> questions) {
-
+    public Information(@NotEmpty Language language, @NotEmpty String name, @NotEmpty String description, List<Conversation> conversations) {
         this.language = language;
         this.name = name;
         this.description = description;
-        this.questions = questions;
+        this.conversations = conversations;
     }
 
     public Language getLanguage() {
@@ -51,15 +53,15 @@ public class Information {
         this.description = description;
     }
 
-    public List<Question> getQuestion() {
-        return questions;
+    public List<Conversation> getConversations() {
+        return conversations;
     }
 
-    public void setQuestion(List<Question> questions) {
-        this.questions = questions;
+    public void setConversations(List<Conversation> conversations) {
+        this.conversations = conversations;
     }
 
-    public String toString(){
+    public String toString() {
         return this.name;
     }
 }

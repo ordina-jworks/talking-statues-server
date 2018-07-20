@@ -7,8 +7,6 @@ import be.ordina.talkingstatues.monuments.MonumentService;
 import be.ordina.talkingstatues.security.ApplicationConfigurationUtils;
 import be.ordina.talkingstatues.visits.Visit;
 import be.ordina.talkingstatues.visits.VisitService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +33,7 @@ public class PopulationService {
 
         if (Boolean.parseBoolean(utils.getProperty(ApplicationConfigurationUtils.INITIAL_DATA_MONUMENTS_KEY))) {
             System.out.println("Adding initial data for Monuments to DB...");
-            monumentService.initializeData(InitialMonumentData.DATA);
+            monumentService.initializeData(InitialMonumentData.MONUMENTS);
         }
 
         if (Boolean.parseBoolean(utils.getProperty(ApplicationConfigurationUtils.INITIAL_DATA_VISITS_KEY))) {
@@ -50,7 +48,7 @@ public class PopulationService {
         List<AppUser> foundUsers = authService.getAllUsersFromDb();
         int count = 0;
         for (AppUser usr : foundUsers) {
-            if(count == 19){
+            if (count == 19) {
                 count = 0;
             }
             Visit newVisit = new Visit(usr.getId(), allMonuments.get(count).getId());

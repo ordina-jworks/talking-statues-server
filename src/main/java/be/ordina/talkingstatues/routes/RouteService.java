@@ -4,8 +4,8 @@ import be.ordina.talkingstatues.monuments.Monument;
 import be.ordina.talkingstatues.monuments.MonumentService;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RouteService {
@@ -23,24 +23,25 @@ public class RouteService {
     }
 
 
-    List<Route> getRoutes(){
+    List<Route> getRoutes() {
         return routeRepository.findAll();
     }
-    Route getRouteById(String id){
+
+    Route getRouteById(String id) {
         return routeRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Route met id "+id+" bestaat niet"));
+                .orElseThrow(() -> new RuntimeException("Route met id " + id + " bestaat niet"));
     }
 
     public Route create(RouteRequest routeRequest) {
-       if(routeRequest.getLocations() == null){
+        if (routeRequest.getLocations() == null) {
             routeRequest.setLocations(new ArrayList<>());
-       }
+        }
 
-       return routeRepository.save(new Route(routeRequest.getName(), monumentService.getSortedMonuments(routeRequest)));
+        return routeRepository.save(new Route(routeRequest.getName(), monumentService.getMonumentsInRoute(routeRequest)));
     }
 
 
-    void deleteRoute(String id){
+    void deleteRoute(String id) {
         routeRepository.deleteById(id);
     }
 }
