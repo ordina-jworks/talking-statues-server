@@ -22,12 +22,9 @@ public class PopulationService {
     private ApplicationConfigurationUtils utils;
 
 
-    private final List<Monument> allMonuments;
-
     public PopulationService(MonumentService monumentService, AuthService authService, VisitService visitService, ApplicationConfigurationUtils utils) {
         this.monumentService = monumentService;
         this.authService = authService;
-        this.allMonuments = monumentService.getAllMonuments();
         this.visitService = visitService;
         this.utils = utils;
 
@@ -51,6 +48,7 @@ public class PopulationService {
             if (count == 19) {
                 count = 0;
             }
+            List<Monument> allMonuments = monumentService.getAllMonuments();
             Visit newVisit = new Visit(usr.getId(), allMonuments.get(count).getId());
             visitService.addVisitToDb(newVisit);
 
