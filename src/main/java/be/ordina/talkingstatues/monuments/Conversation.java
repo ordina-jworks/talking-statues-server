@@ -9,6 +9,7 @@ public class Conversation {
     @NotEmpty
     private String answer;
 
+    public Conversation() {}
 
     public Conversation(@NotEmpty String question, @NotEmpty String answer) {
         this.question = question;
@@ -21,5 +22,13 @@ public class Conversation {
 
     public String getAnswer() {
         return answer;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }
