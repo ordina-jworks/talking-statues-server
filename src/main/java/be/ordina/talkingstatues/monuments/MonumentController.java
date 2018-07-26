@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -93,6 +94,9 @@ public class MonumentController {
 
     @PutMapping(value = "")
     Monument addMonument(@RequestBody Monument monument) {
+        if (StringUtils.isEmptyOrWhitespace(monument.getId())) {
+            monument.setId(null); // clearing up possible empty strings before passing the object to the service
+        }
         return monumentService.addMonument(monument);
     }
 
