@@ -1,5 +1,6 @@
 package be.ordina.talkingstatues.dbpopulation;
 
+import be.ordina.talkingstatues.monuments.Conversation;
 import be.ordina.talkingstatues.monuments.Information;
 import be.ordina.talkingstatues.monuments.Language;
 import be.ordina.talkingstatues.monuments.Monument;
@@ -82,9 +83,14 @@ public class InitialMonumentData {
             "Oorspronkelijk was de kerk gewijd aan Ignatius van Loyola, stichter van de jezuïetenorde. Na het opheffen van de orde in 1773 werd de kerk opnieuw gewijd, ditmaal aan Carolus Borromeus. Na enige tijd gebruikt te zijn voor godsdienstonderwijs is het gebouw sinds 1803 in gebruik als parochiekerk.\n" +
             "De kerk is een typisch product van de contrareformatie, waarin de katholieke Kerk probeerde met pracht en praal het volk weer aan zich te binden en waarin de jezuïeten een leidende rol speelden. De voorgevel is geïnspireerd op onder andere die van de Gesù-kerk in Rome, de moederkerk van de jezuïeten, en is acht meter hoger dan de kerk zelf. De kerk heeft een driebeukige, basilicale opzet. Boven de zijbeuken zijn galerijen aangebracht. Het koor wordt gemarkeerd door een toren.";
 
+    private static final List<Conversation> neusQuestions = Arrays.asList(
+            new Conversation("Wat is uw naam?", "De Neus"),
+            new Conversation( "Hoe oud bent u?", "Dat vraagt men niet")
+    );
+
     public static final Monument[] DATA = new Monument[]{
             /* Sint-Andries */
-            new Monument(Collections.singletonList(new Information(Language.NL, "de NEUS", neusDescription, new ArrayList<>())), 4.3983936310, 51.2149218763, "Sint-Andries", "statue1.jpg"),
+            new Monument(Collections.singletonList(new Information(Language.NL, "de NEUS", neusDescription, neusQuestions)), 4.3983936310, 51.2149218763, "Sint-Andries", "statue1.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "Peter De Grote", pdgDescription, new ArrayList<>())), 4.3938016891, 51.2141422857, "Sint-Andries", "statue2.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "Willem Elsschot (zuil)", wezDescirption, new ArrayList<>())), 4.3967404660, 51.2149581960, "Sint-Andries", "statue3.jpg"),
             new Monument(Collections.singletonList(new Information(Language.NL, "Netje", netjeDescription, new ArrayList<>())), 4.3976318836, 51.2162995688, "Sint-Andries", "statue4.jpg"),

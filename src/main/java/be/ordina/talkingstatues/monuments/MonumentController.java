@@ -2,7 +2,6 @@ package be.ordina.talkingstatues.monuments;
 
 import be.ordina.talkingstatues.appusers.AppUser;
 import be.ordina.talkingstatues.appusers.AuthService;
-import be.ordina.talkingstatues.monuments.Conversation.Answer;
 import be.ordina.talkingstatues.visits.Visit;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.HttpHeaders;
@@ -58,7 +57,7 @@ public class MonumentController {
     }
 
     @GetMapping(value = "/{id}/questions", produces = {"application/vnd.ordina.v1.0+json"})
-    Answer getMonumentAnswer(@PathVariable String id,
+    String getMonumentAnswer(@PathVariable String id,
                              @RequestParam("lang") String language,
                              @RequestParam("question") String question) {
         return monumentService.findAnswer(id, language, question);

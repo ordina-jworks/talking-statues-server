@@ -1,9 +1,5 @@
 package be.ordina.talkingstatues.monuments;
 
-import be.ordina.talkingstatues.monuments.Conversation.Answer;
-import be.ordina.talkingstatues.monuments.Conversation.Conversation;
-import be.ordina.talkingstatues.monuments.Conversation.Question;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +17,8 @@ public class MonumentTestUtils {
 
     public static final String QUESTION_VALUE = "what's your name?";
     public static final String ANSWER_VALUE = "My name is David.";
-    public static final Question QUESTION = new Question(QUESTION_VALUE);
-    public static final Answer ANSWER = new Answer(ANSWER_VALUE);
+    public static final String QUESTION = QUESTION_VALUE;
+    public static final String ANSWER = ANSWER_VALUE;
 
     public static List<Monument> buildRandomMonuments(String area, Language language, int number) {
         ArrayList<Monument> monuments = new ArrayList<>();

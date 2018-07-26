@@ -1,8 +1,5 @@
 package be.ordina.talkingstatues.monuments;
 
-import be.ordina.talkingstatues.monuments.Conversation.Answer;
-import be.ordina.talkingstatues.monuments.Conversation.Conversation;
-import be.ordina.talkingstatues.monuments.Conversation.Question;
 import be.ordina.talkingstatues.routes.RouteRequest;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
@@ -65,9 +62,9 @@ public class MonumentService {
                        .orElseThrow(() -> new RuntimeException("Requested language is not supported"));
     }
 
-    Answer findAnswer(String id, String language, String inputQuestion) {
+    String findAnswer(String id, String language, String inputQuestion) {
         final List<Conversation> conversations = getMonumentInformationByIdAndLanguage(id, language).getConversations();
-        final Map<Answer, Long> answerMap = new HashMap<>();
+        final Map<String, Long> answerMap = new HashMap<>();
         conversations.forEach(conversation -> answerMap.put(conversation.getAnswer(), countMatches(inputQuestion, conversation.getQuestion())));
 
         return findBestMatch(answerMap);
@@ -127,17 +124,17 @@ public class MonumentService {
         return gridFsTemplate.getResource(id);
     }
 
-    private Answer findBestMatch(Map<Answer, Long> questionMap) {
+    private String findBestMatch(Map<String, Long> questionMap) {
         return Collections.max(questionMap.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
     }
 
-    private long countMatches(String inputQuestion, Question question) {
+    private long countMatches(String inputQuestion, String question) {
         return Arrays.stream(inputQuestion.split(" "))
                        .filter(keyword -> hasMatch(question, keyword))
                        .count();
     }
 
-    private boolean hasMatch(Question question, String keyword) {
+    private boolean hasMatch(String question, String keyword) {
         return question.matches("(?i:.*" + keyword + ".*)");
     }
 }

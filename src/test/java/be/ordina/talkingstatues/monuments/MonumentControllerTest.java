@@ -2,8 +2,6 @@ package be.ordina.talkingstatues.monuments;
 
 import be.ordina.talkingstatues.appusers.AppUser;
 import be.ordina.talkingstatues.appusers.AuthService;
-import be.ordina.talkingstatues.monuments.Conversation.Answer;
-import be.ordina.talkingstatues.monuments.Conversation.Conversation;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -90,7 +88,7 @@ public class MonumentControllerTest {
         when(monumentService.findAnswer(MON_ID, NL, QUESTION_VALUE))
                 .thenReturn(expected.getAnswer());
 
-        Answer actual = monumentController.getMonumentAnswer(MON_ID, NL, QUESTION_VALUE);
+        String actual = monumentController.getMonumentAnswer(MON_ID, NL, QUESTION_VALUE);
 
         assertEquals(expected.getAnswer(), actual);
     }

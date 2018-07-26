@@ -1,8 +1,5 @@
 package be.ordina.talkingstatues.monuments;
 
-import be.ordina.talkingstatues.monuments.Conversation.Answer;
-import be.ordina.talkingstatues.monuments.Conversation.Conversation;
-import be.ordina.talkingstatues.monuments.Conversation.Question;
 import be.ordina.talkingstatues.routes.RouteRequest;
 import org.junit.Rule;
 import org.junit.Test;
@@ -122,16 +119,16 @@ public class MonumentServiceTest {
     public void getMonumentQuestionByIdAndLanguageAndQuestion() {
         List<Conversation> conversations = new ArrayList<>();
         conversations.add(new Conversation(QUESTION, ANSWER));
-        conversations.add(new Conversation(new Question("How's the weather?"), new Answer("Sunny!")));
+        conversations.add(new Conversation("How's the weather?", "Sunny!"));
         List<Information> infoList = new ArrayList<>();
         infoList.add(new Information(Language.NL, "name", "desc", conversations));
         Monument monument = new Monument(infoList, 5.00, 5.00, AREA, "picture");
         monument.setId(MON_ID);
         when(monumentRepository.findById(MON_ID)).thenReturn(Optional.of(monument));
 
-        Answer actual = monumentService.findAnswer(MON_ID, MonumentTestUtils.NL, "What is the weather like today?");
+        String actual = monumentService.findAnswer(MON_ID, MonumentTestUtils.NL, "What is the weather like today?");
 
-        assertEquals("Sunny!", actual.getAnswer());
+        assertEquals("Sunny!", actual);
     }
 
     @Test
