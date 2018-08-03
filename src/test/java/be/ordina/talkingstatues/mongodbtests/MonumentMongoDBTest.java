@@ -1,6 +1,6 @@
 package be.ordina.talkingstatues.mongodbtests;
 
-import be.ordina.talkingstatues.monuments.Language;
+import be.ordina.talkingstatues.nlp.Language;
 import be.ordina.talkingstatues.monuments.Monument;
 import be.ordina.talkingstatues.monuments.MonumentRepository;
 import org.junit.After;

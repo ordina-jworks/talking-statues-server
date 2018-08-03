@@ -2,6 +2,7 @@ package be.ordina.talkingstatues.monuments;
 
 import be.ordina.talkingstatues.appusers.AppUser;
 import be.ordina.talkingstatues.appusers.AuthService;
+import be.ordina.talkingstatues.nlp.Language;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;

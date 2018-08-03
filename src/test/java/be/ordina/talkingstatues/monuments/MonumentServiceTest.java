@@ -1,5 +1,6 @@
 package be.ordina.talkingstatues.monuments;
 
+import be.ordina.talkingstatues.nlp.Language;
 import be.ordina.talkingstatues.routes.RouteRequest;
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,8 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static be.ordina.talkingstatues.dbpopulation.InitialMonumentData.MONUMENTS;
-import static be.ordina.talkingstatues.monuments.Language.DE;
-import static be.ordina.talkingstatues.monuments.Language.EN;
+import static be.ordina.talkingstatues.nlp.Language.DE;
+import static be.ordina.talkingstatues.nlp.Language.EN;
 import static be.ordina.talkingstatues.monuments.MonumentTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;

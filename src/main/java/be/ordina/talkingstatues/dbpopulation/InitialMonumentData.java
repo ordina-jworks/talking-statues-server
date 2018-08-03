@@ -2,7 +2,7 @@ package be.ordina.talkingstatues.dbpopulation;
 
 import be.ordina.talkingstatues.monuments.Conversation;
 import be.ordina.talkingstatues.monuments.Information;
-import be.ordina.talkingstatues.monuments.Language;
+import be.ordina.talkingstatues.nlp.Language;
 import be.ordina.talkingstatues.monuments.Monument;
 
 import java.util.ArrayList;

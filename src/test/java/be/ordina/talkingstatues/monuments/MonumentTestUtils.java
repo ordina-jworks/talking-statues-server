@@ -1,5 +1,7 @@
 package be.ordina.talkingstatues.monuments;
 
+import be.ordina.talkingstatues.nlp.Language;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

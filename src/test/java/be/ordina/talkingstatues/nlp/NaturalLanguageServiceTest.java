@@ -9,8 +9,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.thymeleaf.util.StringUtils;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.Assert;
+
+import java.util.List;
 
 public class NaturalLanguageServiceTest {
 
@@ -21,20 +24,48 @@ public class NaturalLanguageServiceTest {
     private NaturalLanguageService nlpService;
 
     @Test
+    public void testInitialization() {
+        for (Language l : Language.values()) {
+            Assert.assertEquals(
+                    !StringUtils.isEmptyOrWhitespace(l.getSentenceDetectorFile()),
+                    nlpService.hasSentenceDetectorFor(l));
+        }
+    }
+
+    @Test
     public void detectLanguage() {
         String testlang = nlpService.detectLanguage("Het gaat binnenkort regenen.");
-        assertTrue("nld".equals(testlang));
+        Assert.assertTrue("nld".equals(testlang));
 
         testlang = nlpService.detectLanguage("The rain will come soon.");
-        assertTrue("eng".equals(testlang));
+        Assert.assertTrue("eng".equals(testlang));
 
         testlang = nlpService.detectLanguage("La pluie va commencer");
-        assertTrue("fra".equals(testlang));
+        Assert.assertTrue("fra".equals(testlang));
 
         testlang = nlpService.detectLanguage("Es geht regnen");
-        assertTrue("deu".equals(testlang));
-
+        Assert.assertTrue("deu".equals(testlang));
 
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void hasSentenceDetectorFor() {
+        nlpService.hasSentenceDetectorFor(null);
+    }
+
+    @Test
+    public void splitIntoPhrases() {
+        List<String> nederlands = nlpService.splitIntoPhrases(Language.NL,
+                "Het gaat regenen! De zon schijnt? Het ijs is slipperig en het monster is onderweg.");
+        Assert.assertEquals(3, nederlands.size());
+
+        List<String> engels = nlpService.splitIntoPhrases(Language.EN,
+                "The sun is shining! But the ice is slippery? This cannot be. There must be something more to this.");
+        Assert.assertEquals(4, engels.size());
+
+        List<String> frans = nlpService.splitIntoPhrases(Language.FR,
+                "La pluie va commencer. Il me faut quelque chose pour me secher!");
+        Assert.assertEquals(1, frans.size());
+
+    }
 }
